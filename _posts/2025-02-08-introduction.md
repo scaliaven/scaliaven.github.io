@@ -3,10 +3,8 @@ layout: post
 title: Introduction
 date: 2025-02-8
 description: what I am going to do
-tags: formatting links
+tags: Computer Science Mathematics Physics
 categories: intro
 ---
 
-
 > I planed to write blogs across three disciplines: Computer Science, Mathematics, and Physics.
-> 

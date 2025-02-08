@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-I become a Research assistant for Professor Shengjie Wang.
+I become a Research assistant for Professor Shengjie Wang 🎉🎉🎉
