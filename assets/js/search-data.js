@@ -30,7 +30,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/repositories/";
           },
-        },{id: "post-introduction",
+        },{id: "post-effect-of-masks-on-indoor-classroom-covid-19-transmission",
+      
+        title: "Effect of Masks on Indoor Classroom Covid-19 Transmission",
+      
+      description: "This is the final project for IMM.",
+      section: "Posts",
+      handler: () => {
+        
+          window.location.href = "/blog/2025/IMM/";
+        
+      },
+    },{id: "post-introduction",
       
         title: "Introduction",
       
