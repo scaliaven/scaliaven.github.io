@@ -30,7 +30,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/repositories/";
           },
-        },{id: "post-effect-of-masks-on-indoor-classroom-covid-19-transmission",
+        },{id: "post-cifar-10-classification-using-resnet",
+      
+        title: "CIFAR-10 Classification using ResNet",
+      
+      description: "A project on CIFAR-10 classification using ResNet.",
+      section: "Posts",
+      handler: () => {
+        
+          window.location.href = "/blog/2025/cifar/";
+        
+      },
+    },{id: "post-effect-of-masks-on-indoor-classroom-covid-19-transmission",
       
         title: "Effect of Masks on Indoor Classroom Covid-19 Transmission",
       
