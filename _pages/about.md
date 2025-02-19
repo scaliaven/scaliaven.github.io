@@ -8,9 +8,9 @@ profile:
   align: right
   image: prof_pic.jpg
   image_circular: false # crops the image to make it circular
-  # more_info: >
-  #   <p>555 your office number</p>
-  #   <p>123 your address street</p>
+  more_info: >
+    <p>NYU, New York City</p>
+    <p>Contact: hh3043@nyu.edu</p>
   #   <p>Your City, State 12345</p>
 
 selected_papers: False # includes a list of papers marked as "selected={true}"
