@@ -18,7 +18,7 @@ ninja.data = [{
           },
         },{id: "nav-projects",
           title: "projects",
-          description: "A growing collection of your cool projects.",
+          description: "Coursework and Research Projects",
           section: "Navigation",
           handler: () => {
             window.location.href = "/projects/";
@@ -65,6 +65,9 @@ ninja.data = [{
       },
     },{id: "news-i-become-a-research-assistant-for-professor-shengjie-wang",
           title: 'I become a Research assistant for Professor Shengjie Wang 🎉🎉🎉',
+          description: "",
+          section: "News",},{id: "news-i-started-to-work-as-a-research-intern-umd-for-summer-2025-under-the-supervision-of-professor-tianyi-zhou-and-professor-furong-huang",
+          title: 'I started to work as a Research Intern @UMD for summer 2025, under...',
           description: "",
           section: "News",},{id: "projects-video-recognition",
           title: 'Video Recognition',
