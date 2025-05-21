@@ -3,7 +3,7 @@ layout: page
 title: Chemical Reaction Prediction
 description: Course Project on Natural Language Processing
 importance: 1
-category: work
+category: Coursework
 img: assets/img/molecule.jpg
 related_publications: true
 ---

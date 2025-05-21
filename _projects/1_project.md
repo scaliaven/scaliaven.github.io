@@ -3,7 +3,7 @@ layout: page
 title: Video Recognition
 description: Summer Research Project on Video Popularity Prediction
 importance: 1
-category: work
+category: Research
 img: assets/img/video.jpg
 related_publications: true
 ---

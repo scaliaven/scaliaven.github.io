@@ -25,13 +25,17 @@ latest_posts:
   enabled: False
   scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
   limit: 3 # leave blank to include all the blog posts
+
+images:
+  compare: true
+  slider: true
 ---
 
 My name is 黄泓嘉 (Huang Honjia /Wong Wangga), sometimes referenced to as Alex. I am currently a junior student at [New York University Shanghai](https://shanghai.nyu.edu/), double majoring in **Computer Science** and **Mathematics**. My research interests include **machine learning**, **multimodal learning**, **computer vision**, **generative models**, and **AI for science**. I am also interest in the **theoretical** part of machine learning as well as **reinforcement learning**.
 
 Before joining NYU Shanghai, I graduated from [华南师范大学附属中学](https://en.wikipedia.org/wiki/Affiliated_High_School_of_South_China_Normal_University)(The Affiliated High School of SCNU) as a participant in [CPhO](https://physoly.tech/resources/), Though not majoring in physics, I am still interested in the subject. In particular, I am much intrigued by Newtonic Mechanics. I think this might be a primal reason why I am into computer vision and machine learning's application towards scientific research.
 
-##### **<font color="red">I am currently seeking a research internship for 2025 summer. If you are interested, please feel free to contact me.</font>**
+<!-- ##### **<font color="red">I am currently seeking a research internship for 2025 summer. If you are interested, please feel free to contact me.</font>** -->
 
 <!-- Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
 

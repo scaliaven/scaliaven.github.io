@@ -3,7 +3,7 @@ layout: page
 title: Audio Classification
 description: Machine Learning Final Project
 importance: 1
-category: work
+category: Coursework
 img: assets/img/audio.jpg
 related_publications: true
 ---
