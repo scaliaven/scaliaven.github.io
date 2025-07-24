@@ -63,8 +63,8 @@ ninja.data = [{
           window.location.href = "/blog/2025/introduction/";
         
       },
-    },{id: "news-i-become-a-research-assistant-for-professor-shengjie-wang",
-          title: 'I become a Research assistant for Professor Shengjie Wang 🎉🎉🎉',
+    },{id: "news-i-become-a-research-assistant-for-professor-shengjie-wang-nyu-shanghai",
+          title: 'I become a Research assistant for Professor Shengjie Wang @NYU Shanghai 🎉🎉🎉',
           description: "",
           section: "News",},{id: "news-i-started-to-work-as-a-research-intern-umd-for-summer-2025-under-the-supervision-of-professor-tianyi-zhou-and-professor-furong-huang",
           title: 'I started to work as a Research Intern @UMD for summer 2025, under...',
