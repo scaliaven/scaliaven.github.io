@@ -11,6 +11,10 @@ profile:
   more_info: >
     <p>NYU, New York City</p>
     <p>Contact: hh3043@nyu.edu</p>
+    <p>Secondary Contact (temporary): hhuang23@umd.edu</p>
+
+  #  echo aGgzMDQzQG55dS5lZHUK | base64 --decode
+  #  <p>Secondary Contact: hhuang23@umd.edu</p>
   #   <p>Your City, State 12345</p>
 
 selected_papers: False # includes a list of papers marked as "selected={true}"
