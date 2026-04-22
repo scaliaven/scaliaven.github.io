@@ -2,17 +2,18 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='https://shanghai.nyu.edu/'>New York University Shanghai</a> · Co2026 · CS & Math · GPA 3.94/4.0
+subtitle: <a href='https://shanghai.nyu.edu/'>New York University Shanghai</a> · Co2026 · CS & Math
 
 profile:
   align: right
   image: prof_pic.jpg
+  image_compare: prof_pic_color.png
   image_circular: false
   more_info: >
     <p>NYU, New York City</p>
     <p>Contact: hh3043@nyu.edu</p>
 
-selected_papers: true
+selected_papers: false
 social: true
 
 announcements:
@@ -38,7 +39,3 @@ Previously, I worked with [Professor Shengjie Wang](https://dail.shanghai.nyu.ed
 
 My interest in physics traces back to competing in the [Chinese Physics Olympiad (CPhO)](https://physoly.tech/resources/) in high school, which first made me think seriously about how to model the real world computationally.
 
-<img-comparison-slider>
-  {% include figure.liquid path="assets/img/prof_pic.jpg" class="img-fluid rounded" slot="first" %}
-  {% include figure.liquid path="assets/img/prof_pic_color.png" class="img-fluid rounded" slot="second" %}
-</img-comparison-slider>
