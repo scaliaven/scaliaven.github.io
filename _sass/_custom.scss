@@ -1,0 +1,349 @@
+/*******************************************************************************
+ * Custom design enhancements for scaliaven.github.io
+ *
+ * Goals: better readability, visual hierarchy, spacing, and subtle polish.
+ * All values use CSS variables where possible for full dark-mode compatibility.
+ ******************************************************************************/
+
+// ── Global ─────────────────────────────────────────────────────────────────────
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// ── Navbar ─────────────────────────────────────────────────────────────────────
+// Replace full-element opacity with backdrop blur for a frosted-glass effect
+// that keeps text and icons at full opacity.
+
+.navbar {
+  opacity: 1 !important;
+  background-color: var(--global-bg-color) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+// ── Post header ─────────────────────────────────────────────────────────────────
+
+.post-header {
+  margin-bottom: 2.25rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--global-divider-color);
+
+  .post-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    margin-bottom: 0.6rem;
+
+    // Highlight the first-name bold span with the theme accent
+    .font-weight-bold {
+      color: var(--global-theme-color);
+    }
+  }
+
+  .desc {
+    font-size: 0.93rem;
+    color: var(--global-text-color-light);
+    margin-bottom: 0;
+
+    a {
+      color: var(--global-text-color-light);
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--global-theme-color);
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+// ── Profile section ────────────────────────────────────────────────────────────
+
+.profile {
+  // Image / comparison slider — subtle elevation and rounded corners
+  img-comparison-slider {
+    display: block;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13);
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 10px 36px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  // Fallback for plain image (when no compare image is set)
+  .img-fluid.z-depth-1 {
+    border-radius: 10px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13) !important;
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 10px 36px rgba(0, 0, 0, 0.2) !important;
+    }
+  }
+
+  // More-info block: styled as a small info card
+  .more-info {
+    margin-top: 1.1rem;
+    padding: 0.75rem 1rem;
+    background-color: var(--global-card-bg-color);
+    border: 1px solid var(--global-divider-color);
+    border-radius: 8px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.78rem;
+    line-height: 1.7;
+
+    p {
+      display: block;
+      margin: 0;
+      color: var(--global-text-color-light);
+    }
+  }
+}
+
+// ── Theme: warm cream bg + dusty violet accent ─────────────────────────────────
+
+:root {
+  // Background: warm off-white instead of pure white
+  --global-bg-color: #f9f8f5;
+  --global-card-bg-color: #ffffff;
+  --global-newsletter-bg-color: #ffffff;
+
+  // Accent: dusty violet replaces neon purple
+  --global-theme-color: #6d28d9;
+  --global-hover-color: #6d28d9;
+
+  // Code bg: violet tint instead of neon purple tint
+  --global-code-bg-color: rgba(109, 40, 217, 0.05);
+
+  // Highlight sweep: soft violet wash, matches the theme
+  --highlight-tint: rgba(109, 40, 217, 0.11);
+  --highlight-tint-hover: rgba(109, 40, 217, 0.2);
+}
+
+html[data-theme="dark"] {
+  // Dark bg stays near-black — no change needed
+  // Accent: light violet replaces cyan in dark mode
+  --global-theme-color: #c4b5fd;
+  --global-hover-color: #c4b5fd;
+
+  // Code bg: violet tint for dark mode
+  --global-code-bg-color: rgba(196, 181, 253, 0.08);
+
+  // Highlight sweep: soft lavender on dark bg
+  --highlight-tint: rgba(196, 181, 253, 0.13);
+  --highlight-tint-hover: rgba(196, 181, 253, 0.24);
+}
+
+@keyframes highlightSweep {
+  from { background-size: 0% 36%; }
+  to   { background-size: 100% 36%; }
+}
+
+// ── Bio content (the clearfix div holding {{ content }}) ───────────────────────
+
+.post article > .clearfix {
+  p {
+    font-size: 1rem;
+    line-height: 1.82;
+    margin-bottom: 1.1rem;
+
+    // Slightly larger first paragraph
+    &:first-of-type {
+      font-size: 1.04rem;
+    }
+
+    // Inline links: clean underline-on-hover instead of permanent underline
+    a {
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease, color 0.2s ease;
+
+      &:hover {
+        border-bottom-color: var(--global-theme-color);
+        text-decoration: none;
+      }
+    }
+
+    // Bold terms: marker-highlight sweep on page load, staggered via --i
+    strong {
+      background-image: linear-gradient(var(--highlight-tint), var(--highlight-tint));
+      background-size: 0% 36%;
+      background-position: 0% 100%;
+      background-repeat: no-repeat;
+      border-radius: 2px;
+      animation: highlightSweep 0.45s ease forwards;
+      animation-delay: calc(0.55s + var(--i, 0) * 0.09s);
+      transition: background-size 0.2s ease;
+
+      &:hover {
+        background-image: linear-gradient(var(--highlight-tint-hover), var(--highlight-tint-hover));
+        background-size: 100% 36%;
+      }
+    }
+  }
+}
+
+// ── Section headings (news / latest posts / selected papers) ───────────────────
+// These are the direct <h2> children of the about article, not headings inside
+// the bio markdown. The a tags inside them carry inline `style="color:inherit"`.
+
+.post article > h2 {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--global-text-color-light) !important;
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1.5px solid var(--global-divider-color);
+  position: relative;
+
+  // A short accent rule in the theme color at the start of the bottom border
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -1.5px;
+    left: 0;
+    width: 2rem;
+    height: 1.5px;
+    background-color: var(--global-theme-color);
+    border-radius: 1px;
+  }
+
+  a {
+    color: inherit !important;
+    text-decoration: none;
+  }
+}
+
+// ── News / Latest-posts table ──────────────────────────────────────────────────
+
+.news {
+  .table-responsive {
+    border-radius: 6px;
+  }
+
+  table.table {
+    tr {
+      transition: background-color 0.14s ease;
+
+      &:hover {
+        // color-mix() is supported in all evergreen browsers (Chrome 111+, FF 113+, Safari 16.2+)
+        background-color: color-mix(in srgb, var(--global-theme-color) 6%, transparent);
+      }
+    }
+
+    th[scope="row"] {
+      font-size: 0.76rem;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-weight: 500;
+      color: var(--global-text-color-light);
+      white-space: nowrap;
+      padding-top: 0.8rem;
+      padding-bottom: 0.8rem;
+      vertical-align: middle;
+      letter-spacing: 0.01em;
+    }
+
+    td {
+      font-size: 0.9rem;
+      line-height: 1.55;
+      padding-top: 0.8rem;
+      padding-bottom: 0.8rem;
+      vertical-align: middle;
+
+      a.news-title {
+        color: var(--global-text-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s ease;
+
+        &:hover {
+          color: var(--global-theme-color);
+        }
+      }
+    }
+  }
+}
+
+// ── Social icons ───────────────────────────────────────────────────────────────
+
+.social {
+  margin-top: 2.25rem;
+
+  .contact-icons {
+    a {
+      display: inline-block;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: translateY(-4px);
+      }
+    }
+  }
+
+  .contact-note {
+    margin-top: 0.5rem;
+    font-size: 0.78rem;
+    color: var(--global-text-color-light);
+  }
+}
+
+// ── Featured-posts cards (latest posts section) ────────────────────────────────
+
+.featured-posts {
+  .card {
+    border: 1px solid var(--global-divider-color) !important;
+    border-radius: 10px !important;
+    transition: box-shadow 0.22s ease, transform 0.22s ease;
+
+    &:hover {
+      box-shadow: 0 6px 22px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// ── ClustrMaps globe centering ─────────────────────────────────────────────────
+
+#clstr_globe {
+  display: block;
+  margin: 0 auto;
+}
+
+// ── Responsive tweaks ──────────────────────────────────────────────────────────
+
+@media (max-width: 768px) {
+  .post-header .post-title {
+    font-size: 1.85rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .post-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+
+    .post-title {
+      font-size: 1.55rem;
+    }
+  }
+
+  .post article > h2 {
+    font-size: 0.68rem;
+  }
+}
