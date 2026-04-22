@@ -76,11 +76,17 @@ body {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13);
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease, opacity 0.4s ease;
 
     &:hover {
       box-shadow: 0 10px 36px rgba(0, 0, 0, 0.2);
     }
+  }
+
+  // Hide the slider until the web component JS registers it,
+  // preventing the "two images flash and collapse" FOUCE on load.
+  img-comparison-slider:not(:defined) {
+    opacity: 0;
   }
 
   // Fallback for plain image (when no compare image is set)
