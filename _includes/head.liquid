@@ -124,14 +124,19 @@
 
 {% if page.images %}
   {% if page.images.compare %}
-    <!-- Image comparison slider -->
+    <!-- Image comparison slider — load JS here (blocking) so the custom element
+         is registered before first paint, eliminating any flash or layout shift. -->
     <link
-      defer
       rel="stylesheet"
       href="{{ site.third_party_libraries.img-comparison-slider.url.css }}"
       integrity="{{ site.third_party_libraries.img-comparison-slider.integrity.css }}"
       crossorigin="anonymous"
     >
+    <script
+      src="{{ site.third_party_libraries.img-comparison-slider.url.js }}"
+      integrity="{{ site.third_party_libraries.img-comparison-slider.integrity.js }}"
+      crossorigin="anonymous"
+    ></script>
   {% endif %}
   {% if page.images.lightbox2 %}
     <!-- Lightbox2 -->

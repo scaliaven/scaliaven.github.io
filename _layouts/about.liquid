@@ -29,7 +29,7 @@ layout: default
       30vw, 95vw"{% endcapture %}
           {% if page.profile.image_compare %}
             {% assign profile_image_compare_path = page.profile.image_compare | prepend: 'assets/img/' %}
-            <img-comparison-slider>
+            <img-comparison-slider class="about-profile-slider" value="20" style="opacity: 0;">
               {% include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=page.profile.image cache_bust=true slot="first" %}
               {% include figure.liquid path=profile_image_compare_path class=profile_image_class sizes=sizes alt=page.profile.image_compare slot="second" %}
             </img-comparison-slider>
@@ -90,5 +90,76 @@ layout: default
     {% if site.newsletter and site.newsletter.enabled and site.footer_fixed %}
       {% include newsletter.liquid center=true %}
     {% endif %}
+
+
+    <script>
+      const segmentText = (text) => {
+        if (typeof Intl !== 'undefined' && Intl.Segmenter) {
+          const segmenter = new Intl.Segmenter(undefined, { granularity: 'grapheme' });
+          return Array.from(segmenter.segment(text), (s) => s.segment);
+        }
+        return Array.from(text);
+      };
+
+      const baseDelayMs = 400;
+      const stepDelayMs = 40;
+
+      document.querySelectorAll('.post article > .clearfix p strong').forEach((el) => {
+        const parts = segmentText(el.textContent || '');
+        const fragment = document.createDocumentFragment();
+        const spans = [];
+        let local = 0;
+
+        parts.forEach((part) => {
+          const span = document.createElement('span');
+          span.style.setProperty('--ci', String(local++));
+          span.textContent = part;
+          fragment.appendChild(span);
+          spans.push(span);
+        });
+
+        el.replaceChildren(fragment);
+
+        spans.forEach((span, index) => {
+          window.setTimeout(() => {
+            span.classList.add('is-bold');
+          }, baseDelayMs + index * stepDelayMs);
+        });
+
+        // Fallback: force completion in case timers are throttled.
+        window.setTimeout(
+          () => spans.forEach((span) => span.classList.add('is-bold')),
+          baseDelayMs + spans.length * stepDelayMs + 150
+        );
+      });
+
+      const initComparisonSliders = () => {
+        document.querySelectorAll('img-comparison-slider.about-profile-slider').forEach((slider) => {
+          const raw = slider.getAttribute('value') || '50';
+          const parsed = Number.parseFloat(raw);
+
+          if (!Number.isNaN(parsed)) {
+            const clamped = Math.max(0, Math.min(100, parsed));
+            slider.value = clamped;
+            slider.setAttribute('value', String(clamped));
+          }
+
+          // Give the web component a brief settle window before revealing,
+          // so the default center position is never visible.
+          window.setTimeout(() => {
+            slider.style.opacity = '1';
+          }, 220);
+        });
+      };
+
+      if (window.customElements && window.customElements.whenDefined) {
+        window.customElements.whenDefined('img-comparison-slider').then(() => {
+          requestAnimationFrame(initComparisonSliders);
+        });
+      } else {
+        initComparisonSliders();
+      }
+
+    </script>
   </article>
 </div>

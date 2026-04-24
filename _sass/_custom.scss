@@ -76,18 +76,13 @@ body {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13);
-    transition: box-shadow 0.3s ease, opacity 0.4s ease;
+    transition: box-shadow 0.3s ease;
 
     &:hover {
       box-shadow: 0 10px 36px rgba(0, 0, 0, 0.2);
     }
   }
 
-  // Hide the slider until the web component JS registers it,
-  // preventing the "two images flash and collapse" FOUCE on load.
-  img-comparison-slider:not(:defined) {
-    opacity: 0;
-  }
 
   // Fallback for plain image (when no compare image is set)
   .img-fluid.z-depth-1 {
@@ -153,11 +148,6 @@ html[data-theme="dark"] {
   --highlight-tint-hover: rgba(196, 181, 253, 0.24);
 }
 
-@keyframes highlightSweep {
-  from { background-size: 0% 36%; }
-  to   { background-size: 100% 36%; }
-}
-
 // ── Bio content (the clearfix div holding {{ content }}) ───────────────────────
 
 .post article > .clearfix {
@@ -183,20 +173,17 @@ html[data-theme="dark"] {
       }
     }
 
-    // Bold terms: marker-highlight sweep on page load, staggered via --i
+    // Bold terms: letter-by-letter bold reveal, staggered via --ci
     strong {
-      background-image: linear-gradient(var(--highlight-tint), var(--highlight-tint));
-      background-size: 0% 36%;
-      background-position: 0% 100%;
-      background-repeat: no-repeat;
-      border-radius: 2px;
-      animation: highlightSweep 0.45s ease forwards;
-      animation-delay: calc(0.55s + var(--i, 0) * 0.09s);
-      transition: background-size 0.2s ease;
+      display: inline;
 
-      &:hover {
-        background-image: linear-gradient(var(--highlight-tint-hover), var(--highlight-tint-hover));
-        background-size: 100% 36%;
+      span {
+        display: inline;
+        font-weight: 400;
+
+        &.is-bold {
+          font-weight: 700;
+        }
       }
     }
   }
