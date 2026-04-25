@@ -2,6 +2,7 @@
 layout: about
 title: about
 permalink: /
+splash: true
 subtitle: <a href='https://shanghai.nyu.edu/'>New York University Shanghai</a> · Co2026 · CS & Math
 
 profile:
