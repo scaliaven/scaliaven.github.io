@@ -17,16 +17,6 @@
 
 <script>
 (function() {
-  // ── Page-enter animation ─────────────────────────────────────────────────────
-  // Hide body immediately so content fades in rather than snapping in after splash.
-  document.body.style.opacity = '0';
-  document.body.style.transition = 'opacity 0.55s ease';
-
-  function revealBody() {
-    document.body.style.opacity = '1';
-  }
-
-  // ── Splash logic ─────────────────────────────────────────────────────────────
   var splash = document.getElementById('site-splash');
   var chars  = document.querySelectorAll('.splash-char');
   var hi     = document.getElementById('splash-hi');
@@ -62,7 +52,6 @@
         clearInterval(iv);
         splash.style.opacity = '0';
         splash.style.pointerEvents = 'none';
-        revealBody();
         setTimeout(function() { splash.remove(); }, 700);
       }
     }, 220);
@@ -73,14 +62,12 @@
     splash.style.transition = 'opacity 0.3s ease';
     splash.style.opacity = '0';
     splash.style.pointerEvents = 'none';
-    revealBody();
     setTimeout(function() { if (splash.parentNode) splash.remove(); }, 350);
   }
   document.addEventListener('keydown', skip, { once: true });
   splash.addEventListener('click', skip, { once: true });
 
   // ── Scroll-reveal ─────────────────────────────────────────────────────────────
-  // Attach IntersectionObserver to news rows and featured post cards after DOM loads.
   document.addEventListener('DOMContentLoaded', function() {
     var revealEls = document.querySelectorAll('.news table tr, .featured-posts .card');
     revealEls.forEach(function(el) { el.classList.add('reveal'); });
