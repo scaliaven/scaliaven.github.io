@@ -101,39 +101,107 @@ layout: default
         return Array.from(text);
       };
 
-      const baseDelayMs = 400;
+      const baseDelayMs = 220;
       const stepDelayMs = 40;
+      const aboutStrongAnimSeenKey = 'about-strong-bold-seen';
+      const splashMaxDurationMs = 4500;
 
-      document.querySelectorAll('.post article > .clearfix p strong').forEach((el) => {
-        const parts = segmentText(el.textContent || '');
-        const fragment = document.createDocumentFragment();
-        const spans = [];
-        let local = 0;
+      const shouldRunAboutStrongAnimation = () => {
+        try {
+          if (window.sessionStorage.getItem(aboutStrongAnimSeenKey) === '1') {
+            return false;
+          }
+          window.sessionStorage.setItem(aboutStrongAnimSeenKey, '1');
+          return true;
+        } catch (e) {
+          // If storage is unavailable, keep the current behavior.
+          return true;
+        }
+      };
 
-        parts.forEach((part) => {
-          const span = document.createElement('span');
-          span.style.setProperty('--ci', String(local++));
-          span.textContent = part;
-          fragment.appendChild(span);
-          spans.push(span);
+      const animateAboutStrongText = () => {
+        document.querySelectorAll('.post article > .clearfix p strong').forEach((el) => {
+          const parts = segmentText(el.textContent || '');
+          const fragment = document.createDocumentFragment();
+          const spans = [];
+          let local = 0;
+
+          parts.forEach((part) => {
+            const span = document.createElement('span');
+            span.style.setProperty('--ci', String(local++));
+            span.textContent = part;
+            fragment.appendChild(span);
+            spans.push(span);
+          });
+
+          el.replaceChildren(fragment);
+
+          spans.forEach((span, index) => {
+            window.setTimeout(() => {
+              span.classList.add('is-bold');
+            }, baseDelayMs + index * stepDelayMs);
+          });
+
+          // Fallback: force completion in case timers are throttled.
+          window.setTimeout(
+            () => spans.forEach((span) => span.classList.add('is-bold')),
+            baseDelayMs + spans.length * stepDelayMs + 150
+          );
+        });
+      };
+
+      const runAfterSplash = (fn) => {
+        const splash = document.getElementById('site-splash');
+        if (!splash) {
+          fn();
+          return;
+        }
+
+        let finished = false;
+        let observer;
+
+        const finish = () => {
+          if (finished) return;
+          finished = true;
+          if (observer) observer.disconnect();
+          fn();
+        };
+
+        observer = new MutationObserver(() => {
+          if (!document.getElementById('site-splash')) {
+            finish();
+          }
         });
 
-        el.replaceChildren(fragment);
+        observer.observe(document.body, { childList: true });
 
-        spans.forEach((span, index) => {
-          window.setTimeout(() => {
-            span.classList.add('is-bold');
-          }, baseDelayMs + index * stepDelayMs);
-        });
-
-        // Fallback: force completion in case timers are throttled.
-        window.setTimeout(
-          () => spans.forEach((span) => span.classList.add('is-bold')),
-          baseDelayMs + spans.length * stepDelayMs + 150
+        splash.addEventListener(
+          'transitionend',
+          () => {
+            if (splash.style.opacity === '0' || !document.getElementById('site-splash')) {
+              finish();
+            }
+          },
+          { once: true }
         );
-      });
+
+        window.setTimeout(finish, splashMaxDurationMs);
+      };
+
+      if (shouldRunAboutStrongAnimation()) {
+        runAfterSplash(animateAboutStrongText);
+      }
 
       const initComparisonSliders = () => {
+        const aboutSliderWarmKey = 'about-slider-warm';
+        let isWarmVisit = false;
+
+        try {
+          isWarmVisit = window.sessionStorage.getItem(aboutSliderWarmKey) === '1';
+        } catch (e) {
+          isWarmVisit = false;
+        }
+
         document.querySelectorAll('img-comparison-slider.about-profile-slider').forEach((slider) => {
           const raw = slider.getAttribute('value') || '50';
           const parsed = Number.parseFloat(raw);
@@ -144,12 +212,22 @@ layout: default
             slider.setAttribute('value', String(clamped));
           }
 
-          // Give the web component a brief settle window before revealing,
-          // so the default center position is never visible.
-          window.setTimeout(() => {
+          if (isWarmVisit) {
             slider.style.opacity = '1';
-          }, 220);
+          } else {
+            // Give the web component a brief settle window before revealing,
+            // so the default center position is never visible on cold load.
+            window.setTimeout(() => {
+              slider.style.opacity = '1';
+            }, 220);
+          }
         });
+
+        try {
+          window.sessionStorage.setItem(aboutSliderWarmKey, '1');
+        } catch (e) {
+          // Ignore storage failures.
+        }
       };
 
       if (window.customElements && window.customElements.whenDefined) {
