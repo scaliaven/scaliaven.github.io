@@ -29,6 +29,21 @@ body {
   transition: box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
+// ── Background grain ───────────────────────────────────────────────────────────
+// Subtle SVG noise overlay for tactility; pointer-events:none so it's inert.
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998; // below splash (9999) but above everything else
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 220px 220px;
+}
+
 // ── Post header ─────────────────────────────────────────────────────────────────
 
 .post-header {
@@ -37,10 +52,11 @@ body {
   border-bottom: 1px solid var(--global-divider-color);
 
   .post-title {
-    font-size: 2.25rem;
-    font-weight: 800;
-    letter-spacing: -0.025em;
-    line-height: 1.15;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 2.6rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
     margin-bottom: 0.6rem;
 
     // Highlight the first-name bold span with the theme accent
@@ -70,6 +86,23 @@ body {
 // ── Profile section ────────────────────────────────────────────────────────────
 
 .profile {
+  position: relative;
+
+  // Decorative ambient glow anchoring the photo
+  &::before {
+    content: "";
+    position: absolute;
+    top: -24px;
+    right: -24px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--global-theme-color) 0%, transparent 68%);
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: 0;
+  }
+
   // Image / comparison slider — subtle elevation and rounded corners
   img-comparison-slider {
     display: block;
@@ -311,6 +344,19 @@ html[data-theme="dark"] {
   }
 }
 
+// ── Scroll-reveal ──────────────────────────────────────────────────────────────
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.48s ease, transform 0.48s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 // ── ClustrMaps globe centering ─────────────────────────────────────────────────
 
 #clstr_globe {
@@ -322,7 +368,7 @@ html[data-theme="dark"] {
 
 @media (max-width: 768px) {
   .post-header .post-title {
-    font-size: 1.85rem;
+    font-size: 2.1rem;
   }
 }
 
@@ -332,7 +378,7 @@ html[data-theme="dark"] {
     padding-bottom: 1rem;
 
     .post-title {
-      font-size: 1.55rem;
+      font-size: 1.8rem;
     }
   }
 

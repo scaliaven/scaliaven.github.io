@@ -17,6 +17,16 @@
 
 <script>
 (function() {
+  // ── Page-enter animation ─────────────────────────────────────────────────────
+  // Hide body immediately so content fades in rather than snapping in after splash.
+  document.body.style.opacity = '0';
+  document.body.style.transition = 'opacity 0.55s ease';
+
+  function revealBody() {
+    document.body.style.opacity = '1';
+  }
+
+  // ── Splash logic ─────────────────────────────────────────────────────────────
   var splash = document.getElementById('site-splash');
   var chars  = document.querySelectorAll('.splash-char');
   var hi     = document.getElementById('splash-hi');
@@ -39,7 +49,7 @@
     hi.style.transform = 'translateY(0)';
   }, 1100);
 
-  // Show + animate dots
+  // Show + animate dots, then auto-dismiss
   setTimeout(function() {
     dots.style.opacity = '1';
     var iv = setInterval(function() {
@@ -50,9 +60,9 @@
       di++;
       if (di > 8) {
         clearInterval(iv);
-        // Fade out
         splash.style.opacity = '0';
         splash.style.pointerEvents = 'none';
+        revealBody();
         setTimeout(function() { splash.remove(); }, 700);
       }
     }, 220);
@@ -63,9 +73,31 @@
     splash.style.transition = 'opacity 0.3s ease';
     splash.style.opacity = '0';
     splash.style.pointerEvents = 'none';
+    revealBody();
     setTimeout(function() { if (splash.parentNode) splash.remove(); }, 350);
   }
   document.addEventListener('keydown', skip, { once: true });
   splash.addEventListener('click', skip, { once: true });
+
+  // ── Scroll-reveal ─────────────────────────────────────────────────────────────
+  // Attach IntersectionObserver to news rows and featured post cards after DOM loads.
+  document.addEventListener('DOMContentLoaded', function() {
+    var revealEls = document.querySelectorAll('.news table tr, .featured-posts .card');
+    revealEls.forEach(function(el) { el.classList.add('reveal'); });
+
+    var observer = new IntersectionObserver(function(entries) {
+      var delay = 0;
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          setTimeout(function() { el.classList.add('visible'); }, delay);
+          delay += 65;
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+    revealEls.forEach(function(el) { observer.observe(el); });
+  });
 })();
 </script>
