@@ -9,48 +9,72 @@
   var sdots  = document.querySelectorAll('.sdot');
   var violet = '#6d28d9';
   var di = 0;
+  var splashSeenKey = 'site-splash-seen';
 
-  // Show chars (CSS transition-delay handles stagger)
-  requestAnimationFrame(function() {
-    chars.forEach(function(c) {
-      c.style.opacity = '1';
-      c.style.transform = 'translateY(0)';
-    });
-  });
-
-  // Show hi line
-  setTimeout(function() {
-    hi.style.opacity = '1';
-    hi.style.transform = 'translateY(0)';
-  }, 1100);
-
-  // Show + animate dots, then auto-dismiss
-  setTimeout(function() {
-    dots.style.opacity = '1';
-    var iv = setInterval(function() {
-      sdots.forEach(function(d, i) {
-        d.style.background = i === (di % 3) ? violet : '#333';
-        d.style.transform  = i === (di % 3) ? 'scale(1.4)' : 'scale(1)';
-      });
-      di++;
-      if (di > 8) {
-        clearInterval(iv);
-        splash.style.opacity = '0';
-        splash.style.pointerEvents = 'none';
-        setTimeout(function() { splash.remove(); }, 700);
+  function shouldShowSplash() {
+    try {
+      if (window.sessionStorage.getItem(splashSeenKey) === '1') {
+        return false;
       }
-    }, 220);
-  }, 1700);
-
-  // Skip on click/keydown
-  function skip() {
-    splash.style.transition = 'opacity 0.3s ease';
-    splash.style.opacity = '0';
-    splash.style.pointerEvents = 'none';
-    setTimeout(function() { if (splash.parentNode) splash.remove(); }, 350);
+      window.sessionStorage.setItem(splashSeenKey, '1');
+      return true;
+    } catch (e) {
+      // If storage is unavailable, default to showing the splash.
+      return true;
+    }
   }
-  document.addEventListener('keydown', skip, { once: true });
-  splash.addEventListener('click', skip, { once: true });
+
+  var showSplash = shouldShowSplash();
+
+  if (!showSplash) {
+    if (splash && splash.parentNode) {
+      splash.remove();
+    }
+  }
+
+  if (showSplash && splash) {
+    // Show chars (CSS transition-delay handles stagger)
+    requestAnimationFrame(function() {
+      chars.forEach(function(c) {
+        c.style.opacity = '1';
+        c.style.transform = 'translateY(0)';
+      });
+    });
+
+    // Show hi line
+    setTimeout(function() {
+      hi.style.opacity = '1';
+      hi.style.transform = 'translateY(0)';
+    }, 1100);
+
+    // Show + animate dots, then auto-dismiss
+    setTimeout(function() {
+      dots.style.opacity = '1';
+      var iv = setInterval(function() {
+        sdots.forEach(function(d, i) {
+          d.style.background = i === (di % 3) ? violet : '#333';
+          d.style.transform  = i === (di % 3) ? 'scale(1.4)' : 'scale(1)';
+        });
+        di++;
+        if (di > 8) {
+          clearInterval(iv);
+          splash.style.opacity = '0';
+          splash.style.pointerEvents = 'none';
+          setTimeout(function() { splash.remove(); }, 700);
+        }
+      }, 220);
+    }, 1700);
+
+    // Skip on click/keydown
+    function skip() {
+      splash.style.transition = 'opacity 0.3s ease';
+      splash.style.opacity = '0';
+      splash.style.pointerEvents = 'none';
+      setTimeout(function() { if (splash.parentNode) splash.remove(); }, 350);
+    }
+    document.addEventListener('keydown', skip, { once: true });
+    splash.addEventListener('click', skip, { once: true });
+  }
 
   // ── Scroll-reveal ─────────────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', function() {
