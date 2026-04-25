@@ -1,0 +1,71 @@
+<!-- _includes/splash.html -->
+<div id="site-splash" style="position:fixed;inset:0;z-index:9999;background:#0d0d0f;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity 0.65s ease;">
+  <div id="splash-chars" style="display:flex;gap:12px;">
+    <span class="splash-char" style="font-size:4rem;font-weight:300;color:#fff;opacity:0;transform:translateY(12px);transition:opacity .4s ease,transform .4s ease;">黄</span>
+    <span class="splash-char" style="font-size:4rem;font-weight:300;color:#fff;opacity:0;transform:translateY(12px);transition:opacity .4s ease,transform .4s ease;transition-delay:.32s;">泓</span>
+    <span class="splash-char" style="font-size:4rem;font-weight:300;color:#fff;opacity:0;transform:translateY(12px);transition:opacity .4s ease,transform .4s ease;transition-delay:.64s;">嘉</span>
+  </div>
+  <div id="splash-hi" style="font-size:1rem;letter-spacing:.18em;text-transform:uppercase;color:#828282;opacity:0;transform:translateY(8px);transition:opacity .5s ease,transform .5s ease;font-weight:300;">
+    Hi, I'm <span style="color:#6d28d9;font-weight:500;">Alex</span><span style="color:#555;"> · Hongjia Huang</span>
+  </div>
+  <div id="splash-dots" style="display:flex;gap:8px;opacity:0;transition:opacity .3s ease;">
+    <div class="sdot" style="width:6px;height:6px;border-radius:50%;background:#333;transition:background .2s,transform .2s;"></div>
+    <div class="sdot" style="width:6px;height:6px;border-radius:50%;background:#333;transition:background .2s,transform .2s;"></div>
+    <div class="sdot" style="width:6px;height:6px;border-radius:50%;background:#333;transition:background .2s,transform .2s;"></div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var splash = document.getElementById('site-splash');
+  var chars  = document.querySelectorAll('.splash-char');
+  var hi     = document.getElementById('splash-hi');
+  var dots   = document.getElementById('splash-dots');
+  var sdots  = document.querySelectorAll('.sdot');
+  var violet = '#6d28d9';
+  var di = 0;
+
+  // Show chars (CSS transition-delay handles stagger)
+  requestAnimationFrame(function() {
+    chars.forEach(function(c) {
+      c.style.opacity = '1';
+      c.style.transform = 'translateY(0)';
+    });
+  });
+
+  // Show hi line
+  setTimeout(function() {
+    hi.style.opacity = '1';
+    hi.style.transform = 'translateY(0)';
+  }, 1100);
+
+  // Show + animate dots
+  setTimeout(function() {
+    dots.style.opacity = '1';
+    var iv = setInterval(function() {
+      sdots.forEach(function(d, i) {
+        d.style.background = i === (di % 3) ? violet : '#333';
+        d.style.transform  = i === (di % 3) ? 'scale(1.4)' : 'scale(1)';
+      });
+      di++;
+      if (di > 8) {
+        clearInterval(iv);
+        // Fade out
+        splash.style.opacity = '0';
+        splash.style.pointerEvents = 'none';
+        setTimeout(function() { splash.remove(); }, 700);
+      }
+    }, 220);
+  }, 1700);
+
+  // Skip on click/keydown
+  function skip() {
+    splash.style.transition = 'opacity 0.3s ease';
+    splash.style.opacity = '0';
+    splash.style.pointerEvents = 'none';
+    setTimeout(function() { if (splash.parentNode) splash.remove(); }, 350);
+  }
+  document.addEventListener('keydown', skip, { once: true });
+  splash.addEventListener('click', skip, { once: true });
+})();
+</script>
