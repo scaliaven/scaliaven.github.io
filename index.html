@@ -2,16 +2,6 @@
     initTheme();
   </script> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8.0.6/dist/styles.min.css" integrity="sha256-3qTIuuUWIFnnU3LpQMjqiXc0p09rvd0dmj+WkpQXSR8=" crossorigin="anonymous"> <script src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8.0.6/dist/index.min.js" integrity="sha256-EXHg3x1K4oIWdyohPeKX2ZS++Wxt/FRPH7Nl01nat1o=" crossorigin="anonymous"></script> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.css" integrity="sha256-yUoNxsvX+Vo8Trj3lZ/Y5ZBf8HlBFsB6Xwm7rH75/9E=" crossorigin="anonymous"> </head> <body class="fixed-top-nav "> <div id="site-splash" style="position:fixed;inset:0;z-index:9999;background:#0d0d0f;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity 0.65s ease;"> <div id="splash-chars" style="display:flex;gap:12px;"> <span class="splash-char" style="font-size:4rem;font-weight:300;color:#fff;opacity:0;transform:translateY(12px);transition:opacity .4s ease,transform .4s ease;">黄</span> <span class="splash-char" style="font-size:4rem;font-weight:300;color:#fff;opacity:0;transform:translateY(12px);transition:opacity .4s ease,transform .4s ease;transition-delay:.32s;">泓</span> <span class="splash-char" style="font-size:4rem;font-weight:300;color:#fff;opacity:0;transform:translateY(12px);transition:opacity .4s ease,transform .4s ease;transition-delay:.64s;">嘉</span> </div> <div id="splash-hi" style="font-size:1rem;letter-spacing:.18em;text-transform:uppercase;color:#828282;opacity:0;transform:translateY(8px);transition:opacity .5s ease,transform .5s ease;font-weight:300;"> Hi, I'm <span style="color:#6d28d9;font-weight:500;">Alex</span><span style="color:#555;"> · Hongjia Huang</span> </div> <div id="splash-dots" style="display:flex;gap:8px;opacity:0;transition:opacity .3s ease;"> <div class="sdot" style="width:6px;height:6px;border-radius:50%;background:#333;transition:background .2s,transform .2s;"></div> <div class="sdot" style="width:6px;height:6px;border-radius:50%;background:#333;transition:background .2s,transform .2s;"></div> <div class="sdot" style="width:6px;height:6px;border-radius:50%;background:#333;transition:background .2s,transform .2s;"></div> </div> </div> <script>
 (function() {
-  // ── Page-enter animation ─────────────────────────────────────────────────────
-  // Hide body immediately so content fades in rather than snapping in after splash.
-  document.body.style.opacity = '0';
-  document.body.style.transition = 'opacity 0.55s ease';
-
-  function revealBody() {
-    document.body.style.opacity = '1';
-  }
-
-  // ── Splash logic ─────────────────────────────────────────────────────────────
   var splash = document.getElementById('site-splash');
   var chars  = document.querySelectorAll('.splash-char');
   var hi     = document.getElementById('splash-hi');
@@ -47,7 +37,6 @@
         clearInterval(iv);
         splash.style.opacity = '0';
         splash.style.pointerEvents = 'none';
-        revealBody();
         setTimeout(function() { splash.remove(); }, 700);
       }
     }, 220);
@@ -58,14 +47,12 @@
     splash.style.transition = 'opacity 0.3s ease';
     splash.style.opacity = '0';
     splash.style.pointerEvents = 'none';
-    revealBody();
     setTimeout(function() { if (splash.parentNode) splash.remove(); }, 350);
   }
   document.addEventListener('keydown', skip, { once: true });
   splash.addEventListener('click', skip, { once: true });
 
   // ── Scroll-reveal ─────────────────────────────────────────────────────────────
-  // Attach IntersectionObserver to news rows and featured post cards after DOM loads.
   document.addEventListener('DOMContentLoaded', function() {
     var revealEls = document.querySelectorAll('.news table tr, .featured-posts .card');
     revealEls.forEach(function(el) { el.classList.add('reveal'); });
