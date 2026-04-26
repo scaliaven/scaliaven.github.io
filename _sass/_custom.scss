@@ -1,75 +1,27 @@
 /*******************************************************************************
- * Editorial Research Journal — design system for scaliaven.github.io
+ * Custom design — editorial restraint over the al-folio defaults.
  *
- * A confident departure from the academic-template default. Treats the page
- * as a journal masthead: bone paper, ink, oxblood accent, characterful serifs,
- * monospace marginalia. Restrained motion, strong typographic presence.
+ * Keeps the al-folio palette intact (white/black/purple light, dark/cyan dark)
+ * and only adds typographic structure: a hairline masthead, a char-split title
+ * with staggered rise, a drop cap, a vertical name chop in the accent color,
+ * and newspaper-style news/cards. No fake journal metadata.
  ******************************************************************************/
 
-// ── Tokens: palette ────────────────────────────────────────────────────────────
+// ── Type tokens (palette comes from _themes.scss → --global-*) ─────────────────
 
 :root {
-  // Paper & ink
-  --paper:        #efe9dc;            // bone paper
-  --paper-deep:   #e7e0cf;            // shadowed paper
-  --paper-card:   #f5f0e3;            // card / inset
-  --ink:          #15140f;            // pressed ink
-  --ink-soft:     #3a3833;
-  --ink-mute:     #7a766c;            // marginalia, captions
-  --ink-faint:    #b8b1a0;            // rules, grid
-
-  // Accent: oxblood
-  --accent:       #8a1f2b;
-  --accent-deep:  #6b1820;
-  --accent-glow:  rgba(138, 31, 43, 0.10);
-  --accent-tint:  rgba(138, 31, 43, 0.06);
-
-  // Map to al-folio globals
-  --global-bg-color:           var(--paper);
-  --global-card-bg-color:      var(--paper-card);
-  --global-newsletter-bg-color:var(--paper-card);
-  --global-text-color:         var(--ink);
-  --global-text-color-light:   var(--ink-mute);
-  --global-divider-color:      rgba(21, 20, 15, 0.12);
-  --global-theme-color:        var(--accent);
-  --global-hover-color:        var(--accent-deep);
-  --global-code-bg-color:      rgba(138, 31, 43, 0.05);
-
-  --highlight-tint:        var(--accent-tint);
-  --highlight-tint-hover:  var(--accent-glow);
-
-  // Type
   --serif-display: "Fraunces", "Cormorant Garamond", Georgia, serif;
   --serif-body:    "Newsreader", "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --mono:          "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-}
 
-html[data-theme="dark"] {
-  --paper:        #14130f;
-  --paper-deep:   #0c0b08;
-  --paper-card:   #1c1a14;
-  --ink:          #ece6d6;
-  --ink-soft:     #c8c2b2;
-  --ink-mute:     #8a8475;
-  --ink-faint:    #3a352c;
-
-  --accent:       #d97757;
-  --accent-deep:  #c75c40;
-  --accent-glow:  rgba(217, 119, 87, 0.14);
-  --accent-tint:  rgba(217, 119, 87, 0.08);
-
-  --global-bg-color:           var(--paper);
-  --global-card-bg-color:      var(--paper-card);
-  --global-newsletter-bg-color:var(--paper-card);
-  --global-text-color:         var(--ink);
-  --global-text-color-light:   var(--ink-mute);
-  --global-divider-color:      rgba(236, 230, 214, 0.14);
-  --global-theme-color:        var(--accent);
-  --global-hover-color:        var(--accent-deep);
-  --global-code-bg-color:      rgba(217, 119, 87, 0.10);
-
-  --highlight-tint:        var(--accent-tint);
-  --highlight-tint-hover:  var(--accent-glow);
+  // Aliases onto al-folio's existing tokens so dark mode flips automatically
+  --rule:      var(--global-divider-color);
+  --rule-ink:  var(--global-text-color);
+  --ink:       var(--global-text-color);
+  --ink-mute:  var(--global-text-color-light);
+  --accent:    var(--global-theme-color);
+  --accent-soft: color-mix(in srgb, var(--global-theme-color) 12%, transparent);
+  --accent-faint: color-mix(in srgb, var(--global-theme-color) 6%, transparent);
 }
 
 // ── Globals ────────────────────────────────────────────────────────────────────
@@ -83,87 +35,19 @@ body {
   font-size: 1.02rem;
   line-height: 1.72;
   letter-spacing: 0.005em;
-  background-color: var(--paper);
-  color: var(--ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-// Paper texture: very fine grain over the whole page
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9998;
-  opacity: 0.05;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 200px 200px;
-}
-html[data-theme="dark"] body::before {
-  opacity: 0.10;
-  mix-blend-mode: screen;
-}
-
-// Faint vertical column rules in the page background — like ruled paper.
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image:
-    linear-gradient(to right, transparent 0, transparent calc(50% - 465px), var(--ink-faint) calc(50% - 465px), var(--ink-faint) calc(50% - 464.5px), transparent calc(50% - 464.5px)),
-    linear-gradient(to right, transparent 0, transparent calc(50% + 464.5px), var(--ink-faint) calc(50% + 464.5px), var(--ink-faint) calc(50% + 465px), transparent calc(50% + 465px));
-  opacity: 0.5;
-}
-
-// Text selection
 ::selection {
   background: var(--accent);
-  color: var(--paper);
+  color: var(--global-bg-color);
 }
 
-// ── Folio number — top-right marginalia ────────────────────────────────────────
-
-.editorial-folio {
-  position: fixed;
-  top: 88px;
-  right: 28px;
-  z-index: 5;
-  font-family: var(--mono);
-  font-size: 0.66rem;
-  color: var(--ink-mute);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  pointer-events: none;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  line-height: 1;
-
-  &::before {
-    content: "";
-    display: block;
-    width: 1px;
-    height: 28px;
-    background: var(--ink-faint);
-    margin: 0 auto 12px;
-  }
-
-  @media (max-width: 1180px) { display: none; }
-}
-
-// ── Navbar ─────────────────────────────────────────────────────────────────────
+// ── Navbar — quiet, monospaced nav links ───────────────────────────────────────
 
 .navbar {
-  background-color: rgba(239, 233, 220, 0.82) !important;
-  backdrop-filter: blur(14px) saturate(1.05);
-  -webkit-backdrop-filter: blur(14px) saturate(1.05);
-  border-bottom: 1px solid var(--global-divider-color);
-  opacity: 1 !important;
-  transition: box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+  border-bottom: 1px solid var(--rule);
 
   .navbar-brand {
     font-family: var(--serif-display);
@@ -179,64 +63,32 @@ body::after {
     font-weight: 500;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--ink-soft) !important;
     transition: color 0.2s ease;
 
     &:hover, &.active { color: var(--accent) !important; }
   }
 }
-html[data-theme="dark"] .navbar {
-  background-color: rgba(20, 19, 15, 0.82) !important;
-}
 
-// ── Masthead — journal title block above the hero ──────────────────────────────
+// ── Masthead — a single hairline rule above the title ──────────────────────────
 
 .masthead {
-  margin: 1.2rem 0 1.5rem;
-  font-family: var(--mono);
-  text-align: center;
-  color: var(--ink-mute);
+  margin: 1.4rem 0 1.6rem;
   position: relative;
   opacity: 0;
-  animation: mast-rise 0.9s 0.05s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation: mast-rise 0.8s 0.05s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
 
   .masthead-rule {
     height: 0;
-    border-top: 1.5px solid var(--ink);
+    border-top: 1.5px solid var(--rule-ink);
     margin: 0 auto;
     transform-origin: left center;
-    animation: rule-draw 0.9s 0.0s cubic-bezier(0.7, 0, 0.3, 1) both;
+    animation: rule-draw 0.85s 0s cubic-bezier(0.7, 0, 0.3, 1) both;
   }
   .masthead-rule.thin {
     border-top-width: 0.5px;
-    border-top-color: var(--ink-faint);
-    animation-delay: 0.55s;
-  }
-
-  .masthead-meta {
-    font-size: 0.68rem;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    padding: 0.7rem 0 0.55rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.1rem;
-  }
-  .masthead-meta .sep {
-    color: var(--accent);
-    font-weight: 700;
-  }
-  .masthead-meta .ornament {
-    color: var(--accent);
-    font-family: var(--serif-display);
-    font-style: italic;
-    font-variation-settings: "opsz" 144;
-    font-size: 0.95rem;
-    letter-spacing: 0;
-    text-transform: none;
-    transform: translateY(-1px);
+    border-top-color: var(--rule);
+    margin-top: 0.55rem;
+    animation-delay: 0.45s;
   }
 }
 
@@ -249,26 +101,13 @@ html[data-theme="dark"] .navbar {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-// ── Post header — the hero/title block ─────────────────────────────────────────
+// ── Post header — title block ──────────────────────────────────────────────────
 
 .post-header {
   margin: 0 0 2.5rem;
   padding-bottom: 1.6rem;
-  border-bottom: 1px solid var(--ink);
+  border-bottom: 1px solid var(--rule-ink);
   position: relative;
-
-  // Tiny caps label above the name
-  &::before {
-    content: "AUTHOR  ⁂  RESIDENT THEORIST";
-    display: block;
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.32em;
-    color: var(--ink-mute);
-    margin-bottom: 0.7rem;
-    opacity: 0;
-    animation: fade-up 0.6s 0.5s ease-out forwards;
-  }
 
   .post-title {
     font-family: var(--serif-display);
@@ -306,7 +145,7 @@ html[data-theme="dark"] .navbar {
       opacity: 0;
       transform: translateY(0.18em);
       animation: letter-rise 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-      animation-delay: calc(0.1s + var(--ci, 0) * 22ms);
+      animation-delay: calc(0.05s + var(--ci, 0) * 22ms);
     }
 
     &:hover {
@@ -318,11 +157,11 @@ html[data-theme="dark"] .navbar {
     font-family: var(--serif-body);
     font-style: italic;
     font-size: 1.02rem;
-    color: var(--ink-soft);
+    color: var(--ink-mute);
     margin: 0;
     max-width: 56ch;
     opacity: 0;
-    animation: fade-up 0.6s 0.95s ease-out forwards;
+    animation: fade-up 0.6s 0.85s ease-out forwards;
 
     a {
       color: var(--ink);
@@ -333,38 +172,11 @@ html[data-theme="dark"] .navbar {
 
       &:hover {
         color: var(--accent);
-        background-color: var(--accent-tint);
+        background-color: var(--accent-faint);
       }
     }
   }
 
-  // Chinese characters as a vertical "chop" mark on the right
-  .post-header-chop {
-    position: absolute;
-    top: 1.4rem;
-    right: 0;
-    font-family: var(--serif-display);
-    font-variation-settings: "opsz" 144, "wght" 500;
-    font-size: 1.55rem;
-    line-height: 1.1;
-    letter-spacing: 0.05em;
-    writing-mode: vertical-rl;
-    color: var(--accent);
-    padding: 0.4rem 0.6rem;
-    border: 1.5px solid var(--accent);
-    border-radius: 2px;
-    opacity: 0;
-    animation: chop-stamp 0.45s 0.85s cubic-bezier(0.3, 1.5, 0.6, 1) forwards;
-
-    @media (max-width: 720px) {
-      position: static;
-      writing-mode: horizontal-tb;
-      display: inline-block;
-      margin-bottom: 0.8rem;
-      font-size: 1.2rem;
-      letter-spacing: 0.4em;
-    }
-  }
 }
 
 @keyframes letter-rise {
@@ -378,113 +190,53 @@ html[data-theme="dark"] .navbar {
   from { transform: scaleX(0); }
   to   { transform: scaleX(1); }
 }
-@keyframes chop-stamp {
-  from { opacity: 0; transform: scale(1.4) rotate(-3deg); }
-  to   { opacity: 0.95; transform: scale(1) rotate(-1.5deg); }
-}
 
-// ── Profile — treated as a "Plate" with caption ────────────────────────────────
+// ── Profile image ──────────────────────────────────────────────────────────────
 
 .profile {
-  position: relative;
   margin-bottom: 1.5rem;
 
   &.float-right { padding-left: 1.5rem; }
   &.float-left  { padding-right: 1.5rem; }
 
-  // The plate frame — a thin oxblood corner mark, top-left
-  &::before {
-    content: "";
-    position: absolute;
-    top: -10px;
-    left: 0;
-    width: 22px;
-    height: 22px;
-    border-top: 1.5px solid var(--accent);
-    border-left: 1.5px solid var(--accent);
-    pointer-events: none;
-    z-index: 2;
-  }
-  &.float-right::before { left: 1.5rem; }
-  // bottom-right corner mark
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    right: -10px;
-    width: 22px;
-    height: 22px;
-    border-bottom: 1.5px solid var(--accent);
-    border-right: 1.5px solid var(--accent);
-    pointer-events: none;
-    z-index: 2;
-  }
-
   img-comparison-slider {
     display: block;
     border-radius: 2px;
     overflow: hidden;
-    filter: contrast(1.04) saturate(0.95);
-    box-shadow:
-      0 1px 0 var(--ink-faint),
-      0 18px 36px -20px rgba(21, 20, 15, 0.35);
-    transition: filter 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 1px 0 var(--rule), 0 18px 36px -22px rgba(0, 0, 0, 0.30);
+    transition: box-shadow 0.4s ease;
 
     &:hover {
-      filter: contrast(1.08) saturate(1);
-      box-shadow:
-        0 1px 0 var(--accent),
-        0 22px 44px -18px rgba(21, 20, 15, 0.4);
+      box-shadow: 0 1px 0 var(--accent), 0 22px 44px -20px rgba(0, 0, 0, 0.35);
     }
   }
 
   .img-fluid.z-depth-1 {
     border-radius: 2px !important;
-    filter: contrast(1.04) saturate(0.95);
-    box-shadow:
-      0 1px 0 var(--ink-faint),
-      0 18px 36px -20px rgba(21, 20, 15, 0.35) !important;
-    transition: filter 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 1px 0 var(--rule), 0 18px 36px -22px rgba(0, 0, 0, 0.30) !important;
+    transition: box-shadow 0.4s ease;
 
     &:hover {
-      filter: contrast(1.08) saturate(1);
-      box-shadow:
-        0 1px 0 var(--accent),
-        0 22px 44px -18px rgba(21, 20, 15, 0.4) !important;
+      box-shadow: 0 1px 0 var(--accent), 0 22px 44px -20px rgba(0, 0, 0, 0.35) !important;
     }
   }
 
-  // The "plate" caption (renders out the more_info, plus added monospace caption)
   .more-info {
     margin-top: 0.9rem;
     padding: 0.55rem 0 0;
-    border-top: 0.5px solid var(--ink-faint);
+    border-top: 0.5px solid var(--rule);
     background: transparent;
     font-family: var(--mono);
     font-size: 0.7rem;
     line-height: 1.7;
     color: var(--ink-mute);
     letter-spacing: 0.04em;
-    position: relative;
 
-    &::before {
-      content: "PLATE I.";
-      display: block;
-      color: var(--accent);
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      font-size: 0.62rem;
-      margin-bottom: 0.4rem;
-    }
-
-    p {
-      margin: 0;
-      color: var(--ink-mute);
-    }
+    p { margin: 0; color: var(--ink-mute); }
   }
 }
 
-// ── Bio content (the clearfix div holding {{ content }}) ───────────────────────
+// ── Bio content ────────────────────────────────────────────────────────────────
 
 .post article > .clearfix {
   font-family: var(--serif-body);
@@ -495,7 +247,7 @@ html[data-theme="dark"] .navbar {
     font-size: 1.04rem;
     line-height: 1.78;
     margin-bottom: 1.15rem;
-    color: var(--ink-soft);
+    color: var(--ink);
     text-align: left;
     hyphens: auto;
   }
@@ -530,11 +282,10 @@ html[data-theme="dark"] .navbar {
     &:hover {
       color: var(--accent);
       background-size: 100% 2px;
-      background-color: var(--accent-tint);
+      background-color: var(--accent-faint);
     }
   }
 
-  // Bold terms — keep the staggered letter reveal but use weight + ink tone
   p strong {
     display: inline;
     color: var(--ink);
@@ -543,7 +294,7 @@ html[data-theme="dark"] .navbar {
     span {
       display: inline;
       font-weight: 400;
-      color: var(--ink-soft);
+      color: var(--ink-mute);
       transition: color 0.18s ease;
 
       &.is-bold {
@@ -553,18 +304,13 @@ html[data-theme="dark"] .navbar {
     }
   }
 
-  em { font-style: italic; color: var(--ink-soft); }
+  em { font-style: italic; color: var(--ink-mute); }
 }
 
 // ── Section headings (news / latest posts / selected papers) ───────────────────
-// Numbered as § 01, § 02 … via CSS counter on the article.
-
-.post article {
-  counter-reset: section;
-}
+// Italic display serif with a thin rule trailing right — no fake counter.
 
 .post article > h2 {
-  counter-increment: section;
   font-family: var(--serif-display);
   font-variation-settings: "opsz" 144, "SOFT" 60, "wght" 380;
   font-weight: 400;
@@ -575,29 +321,16 @@ html[data-theme="dark"] .navbar {
   margin: 3.2rem 0 1.4rem;
   padding: 0;
   border: 0;
-  position: relative;
   display: flex;
   align-items: baseline;
   gap: 1rem;
-
-  &::before {
-    content: "§ " counter(section, decimal-leading-zero);
-    font-family: var(--mono);
-    font-style: normal;
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    color: var(--accent);
-    flex-shrink: 0;
-    transform: translateY(-0.3em);
-  }
 
   &::after {
     content: "";
     flex-grow: 1;
     height: 0;
-    border-top: 0.5px solid var(--ink-faint);
-    transform: translateY(-0.3em);
+    border-top: 0.5px solid var(--rule);
+    transform: translateY(-0.35em);
   }
 
   a {
@@ -609,7 +342,7 @@ html[data-theme="dark"] .navbar {
   }
 }
 
-// ── News / Latest-posts table ─ rendered as editorial dispatches ───────────────
+// ── News / Latest-posts table — editorial dispatches ───────────────────────────
 
 .news {
   margin-bottom: 1rem;
@@ -621,13 +354,13 @@ html[data-theme="dark"] .navbar {
     border-collapse: collapse;
 
     tr {
-      border-bottom: 0.5px solid var(--ink-faint);
+      border-bottom: 0.5px solid var(--rule);
       transition: background-color 0.2s ease;
 
-      &:first-child { border-top: 0.5px solid var(--ink-faint); }
+      &:first-child { border-top: 0.5px solid var(--rule); }
 
       &:hover {
-        background-color: var(--accent-tint);
+        background-color: var(--accent-faint);
 
         th[scope="row"] { color: var(--accent); }
       }
@@ -652,7 +385,7 @@ html[data-theme="dark"] .navbar {
       font-family: var(--serif-body);
       font-size: 0.98rem;
       line-height: 1.55;
-      color: var(--ink-soft);
+      color: var(--ink);
       padding: 0.95rem 0.4rem;
       vertical-align: baseline;
       border: none;
@@ -689,12 +422,12 @@ html[data-theme="dark"] .navbar {
   .card {
     background-color: transparent !important;
     border: 0 !important;
-    border-top: 0.5px solid var(--ink-faint) !important;
+    border-top: 0.5px solid var(--rule) !important;
     border-radius: 0 !important;
     transition: background-color 0.22s ease;
 
     &:hover {
-      background-color: var(--accent-tint);
+      background-color: var(--accent-faint);
 
       .card-title { color: var(--accent); }
     }
@@ -724,27 +457,14 @@ html[data-theme="dark"] .navbar {
   margin-top: 3rem;
   text-align: center;
   padding: 1.5rem 0;
-  border-top: 0.5px solid var(--ink-faint);
-  border-bottom: 0.5px solid var(--ink-faint);
-  position: relative;
-
-  &::before {
-    content: "✦";
-    position: absolute;
-    top: -0.7em;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--paper);
-    padding: 0 0.6em;
-    color: var(--accent);
-    font-size: 0.9rem;
-  }
+  border-top: 0.5px solid var(--rule);
+  border-bottom: 0.5px solid var(--rule);
 
   .contact-icons {
     a {
       display: inline-block;
       margin: 0 0.45rem;
-      color: var(--ink-soft);
+      color: var(--ink-mute);
       transition: color 0.2s ease, transform 0.2s ease;
 
       &:hover {
@@ -763,12 +483,11 @@ html[data-theme="dark"] .navbar {
   }
 }
 
-// ── ClustrMaps globe — center & frame ──────────────────────────────────────────
+// ── ClustrMaps globe ───────────────────────────────────────────────────────────
 
 #clstr_globe {
   display: block;
   margin: 1.5rem auto;
-  filter: contrast(1.05) sepia(0.15) hue-rotate(-15deg);
 }
 
 // ── Scroll-reveal — kept for news rows / cards ─────────────────────────────────
@@ -804,11 +523,6 @@ footer {
   .post article > h2 {
     font-size: 1.55rem;
     margin-top: 2.4rem;
-  }
-  .masthead .masthead-meta {
-    font-size: 0.6rem;
-    letter-spacing: 0.22em;
-    gap: 0.35rem 0.7rem;
   }
 }
 
