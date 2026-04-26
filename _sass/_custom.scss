@@ -1,388 +1,823 @@
 /*******************************************************************************
- * Custom design enhancements for scaliaven.github.io
+ * Editorial Research Journal — design system for scaliaven.github.io
  *
- * Goals: better readability, visual hierarchy, spacing, and subtle polish.
- * All values use CSS variables where possible for full dark-mode compatibility.
+ * A confident departure from the academic-template default. Treats the page
+ * as a journal masthead: bone paper, ink, oxblood accent, characterful serifs,
+ * monospace marginalia. Restrained motion, strong typographic presence.
  ******************************************************************************/
 
-// ── Global ─────────────────────────────────────────────────────────────────────
+// ── Tokens: palette ────────────────────────────────────────────────────────────
 
-html {
-  scroll-behavior: smooth;
+:root {
+  // Paper & ink
+  --paper:        #efe9dc;            // bone paper
+  --paper-deep:   #e7e0cf;            // shadowed paper
+  --paper-card:   #f5f0e3;            // card / inset
+  --ink:          #15140f;            // pressed ink
+  --ink-soft:     #3a3833;
+  --ink-mute:     #7a766c;            // marginalia, captions
+  --ink-faint:    #b8b1a0;            // rules, grid
+
+  // Accent: oxblood
+  --accent:       #8a1f2b;
+  --accent-deep:  #6b1820;
+  --accent-glow:  rgba(138, 31, 43, 0.10);
+  --accent-tint:  rgba(138, 31, 43, 0.06);
+
+  // Map to al-folio globals
+  --global-bg-color:           var(--paper);
+  --global-card-bg-color:      var(--paper-card);
+  --global-newsletter-bg-color:var(--paper-card);
+  --global-text-color:         var(--ink);
+  --global-text-color-light:   var(--ink-mute);
+  --global-divider-color:      rgba(21, 20, 15, 0.12);
+  --global-theme-color:        var(--accent);
+  --global-hover-color:        var(--accent-deep);
+  --global-code-bg-color:      rgba(138, 31, 43, 0.05);
+
+  --highlight-tint:        var(--accent-tint);
+  --highlight-tint-hover:  var(--accent-glow);
+
+  // Type
+  --serif-display: "Fraunces", "Cormorant Garamond", Georgia, serif;
+  --serif-body:    "Newsreader", "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --mono:          "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 }
 
+html[data-theme="dark"] {
+  --paper:        #14130f;
+  --paper-deep:   #0c0b08;
+  --paper-card:   #1c1a14;
+  --ink:          #ece6d6;
+  --ink-soft:     #c8c2b2;
+  --ink-mute:     #8a8475;
+  --ink-faint:    #3a352c;
+
+  --accent:       #d97757;
+  --accent-deep:  #c75c40;
+  --accent-glow:  rgba(217, 119, 87, 0.14);
+  --accent-tint:  rgba(217, 119, 87, 0.08);
+
+  --global-bg-color:           var(--paper);
+  --global-card-bg-color:      var(--paper-card);
+  --global-newsletter-bg-color:var(--paper-card);
+  --global-text-color:         var(--ink);
+  --global-text-color-light:   var(--ink-mute);
+  --global-divider-color:      rgba(236, 230, 214, 0.14);
+  --global-theme-color:        var(--accent);
+  --global-hover-color:        var(--accent-deep);
+  --global-code-bg-color:      rgba(217, 119, 87, 0.10);
+
+  --highlight-tint:        var(--accent-tint);
+  --highlight-tint-hover:  var(--accent-glow);
+}
+
+// ── Globals ────────────────────────────────────────────────────────────────────
+
+html { scroll-behavior: smooth; }
+
 body {
-  line-height: 1.75;
+  font-family: var(--serif-body);
+  font-feature-settings: "liga", "kern", "onum";
+  font-optical-sizing: auto;
+  font-size: 1.02rem;
+  line-height: 1.72;
+  letter-spacing: 0.005em;
+  background-color: var(--paper);
+  color: var(--ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-// ── Navbar ─────────────────────────────────────────────────────────────────────
-// Replace full-element opacity with backdrop blur for a frosted-glass effect
-// that keeps text and icons at full opacity.
-
-.navbar {
-  opacity: 1 !important;
-  background-color: var(--global-bg-color) !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: box-shadow 0.25s ease, border-color 0.25s ease;
-}
-
-// ── Background grain ───────────────────────────────────────────────────────────
-// Subtle SVG noise overlay for tactility; pointer-events:none so it's inert.
-
+// Paper texture: very fine grain over the whole page
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 9998; // below splash (9999) but above everything else
-  opacity: 0.028;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E");
+  z-index: 9998;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
-  background-size: 220px 220px;
+  background-size: 200px 200px;
+}
+html[data-theme="dark"] body::before {
+  opacity: 0.10;
+  mix-blend-mode: screen;
 }
 
-// ── Post header ─────────────────────────────────────────────────────────────────
+// Faint vertical column rules in the page background — like ruled paper.
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(to right, transparent 0, transparent calc(50% - 465px), var(--ink-faint) calc(50% - 465px), var(--ink-faint) calc(50% - 464.5px), transparent calc(50% - 464.5px)),
+    linear-gradient(to right, transparent 0, transparent calc(50% + 464.5px), var(--ink-faint) calc(50% + 464.5px), var(--ink-faint) calc(50% + 465px), transparent calc(50% + 465px));
+  opacity: 0.5;
+}
+
+// Text selection
+::selection {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+// ── Folio number — top-right marginalia ────────────────────────────────────────
+
+.editorial-folio {
+  position: fixed;
+  top: 88px;
+  right: 28px;
+  z-index: 5;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  color: var(--ink-mute);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  pointer-events: none;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  line-height: 1;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 28px;
+    background: var(--ink-faint);
+    margin: 0 auto 12px;
+  }
+
+  @media (max-width: 1180px) { display: none; }
+}
+
+// ── Navbar ─────────────────────────────────────────────────────────────────────
+
+.navbar {
+  background-color: rgba(239, 233, 220, 0.82) !important;
+  backdrop-filter: blur(14px) saturate(1.05);
+  -webkit-backdrop-filter: blur(14px) saturate(1.05);
+  border-bottom: 1px solid var(--global-divider-color);
+  opacity: 1 !important;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+
+  .navbar-brand {
+    font-family: var(--serif-display);
+    font-weight: 500;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+    letter-spacing: 0.005em;
+  }
+
+  .nav-item .nav-link {
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft) !important;
+    transition: color 0.2s ease;
+
+    &:hover, &.active { color: var(--accent) !important; }
+  }
+}
+html[data-theme="dark"] .navbar {
+  background-color: rgba(20, 19, 15, 0.82) !important;
+}
+
+// ── Masthead — journal title block above the hero ──────────────────────────────
+
+.masthead {
+  margin: 1.2rem 0 1.5rem;
+  font-family: var(--mono);
+  text-align: center;
+  color: var(--ink-mute);
+  position: relative;
+  opacity: 0;
+  animation: mast-rise 0.9s 0.05s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+
+  .masthead-rule {
+    height: 0;
+    border-top: 1.5px solid var(--ink);
+    margin: 0 auto;
+    transform-origin: left center;
+    animation: rule-draw 0.9s 0.0s cubic-bezier(0.7, 0, 0.3, 1) both;
+  }
+  .masthead-rule.thin {
+    border-top-width: 0.5px;
+    border-top-color: var(--ink-faint);
+    animation-delay: 0.55s;
+  }
+
+  .masthead-meta {
+    font-size: 0.68rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    padding: 0.7rem 0 0.55rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.1rem;
+  }
+  .masthead-meta .sep {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .masthead-meta .ornament {
+    color: var(--accent);
+    font-family: var(--serif-display);
+    font-style: italic;
+    font-variation-settings: "opsz" 144;
+    font-size: 0.95rem;
+    letter-spacing: 0;
+    text-transform: none;
+    transform: translateY(-1px);
+  }
+}
+
+@keyframes rule-draw {
+  from { transform: scaleX(0); opacity: 0.4; }
+  to   { transform: scaleX(1); opacity: 1; }
+}
+@keyframes mast-rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// ── Post header — the hero/title block ─────────────────────────────────────────
 
 .post-header {
-  margin-bottom: 2.25rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--global-divider-color);
+  margin: 0 0 2.5rem;
+  padding-bottom: 1.6rem;
+  border-bottom: 1px solid var(--ink);
+  position: relative;
+
+  // Tiny caps label above the name
+  &::before {
+    content: "AUTHOR  ⁂  RESIDENT THEORIST";
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.32em;
+    color: var(--ink-mute);
+    margin-bottom: 0.7rem;
+    opacity: 0;
+    animation: fade-up 0.6s 0.5s ease-out forwards;
+  }
 
   .post-title {
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: 2.6rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    line-height: 1.12;
-    margin-bottom: 0.6rem;
+    font-family: var(--serif-display);
+    font-variation-settings: "opsz" 144, "SOFT" 30, "wght" 350;
+    font-weight: 350;
+    font-size: clamp(2.6rem, 6.4vw, 4.6rem);
+    letter-spacing: -0.025em;
+    line-height: 0.96;
+    margin: 0 0 0.55rem;
+    color: var(--ink);
+    transition: font-variation-settings 0.6s ease;
 
-    // Highlight the first-name bold span with the theme accent
     .font-weight-bold {
-      color: var(--global-theme-color);
+      font-weight: 600;
+      font-variation-settings: "opsz" 144, "SOFT" 0, "wght" 600;
+      color: var(--ink);
+      font-style: italic;
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0; right: 0; bottom: -0.04em;
+        height: 0.18em;
+        background: var(--accent);
+        opacity: 0.18;
+        transform-origin: left;
+        animation: hilite-sweep 0.9s 1.0s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+      }
+    }
+
+    // Letterpress reveal: each letter starts pressed-down then lifts
+    .post-title-char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(0.18em);
+      animation: letter-rise 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      animation-delay: calc(0.1s + var(--ci, 0) * 22ms);
+    }
+
+    &:hover {
+      font-variation-settings: "opsz" 144, "SOFT" 100, "wght" 380;
     }
   }
 
   .desc {
-    font-size: 0.93rem;
-    color: var(--global-text-color-light);
-    margin-bottom: 0;
+    font-family: var(--serif-body);
+    font-style: italic;
+    font-size: 1.02rem;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 56ch;
+    opacity: 0;
+    animation: fade-up 0.6s 0.95s ease-out forwards;
 
     a {
-      color: var(--global-text-color-light);
+      color: var(--ink);
       text-decoration: none;
-      transition: color 0.2s ease;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 1px;
+      transition: color 0.2s ease, background-color 0.2s ease;
 
       &:hover {
-        color: var(--global-theme-color);
-        text-decoration: none;
+        color: var(--accent);
+        background-color: var(--accent-tint);
       }
     }
   }
+
+  // Chinese characters as a vertical "chop" mark on the right
+  .post-header-chop {
+    position: absolute;
+    top: 1.4rem;
+    right: 0;
+    font-family: var(--serif-display);
+    font-variation-settings: "opsz" 144, "wght" 500;
+    font-size: 1.55rem;
+    line-height: 1.1;
+    letter-spacing: 0.05em;
+    writing-mode: vertical-rl;
+    color: var(--accent);
+    padding: 0.4rem 0.6rem;
+    border: 1.5px solid var(--accent);
+    border-radius: 2px;
+    opacity: 0;
+    animation: chop-stamp 0.45s 0.85s cubic-bezier(0.3, 1.5, 0.6, 1) forwards;
+
+    @media (max-width: 720px) {
+      position: static;
+      writing-mode: horizontal-tb;
+      display: inline-block;
+      margin-bottom: 0.8rem;
+      font-size: 1.2rem;
+      letter-spacing: 0.4em;
+    }
+  }
 }
 
-// ── Profile section ────────────────────────────────────────────────────────────
+@keyframes letter-rise {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes hilite-sweep {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes chop-stamp {
+  from { opacity: 0; transform: scale(1.4) rotate(-3deg); }
+  to   { opacity: 0.95; transform: scale(1) rotate(-1.5deg); }
+}
+
+// ── Profile — treated as a "Plate" with caption ────────────────────────────────
 
 .profile {
   position: relative;
+  margin-bottom: 1.5rem;
 
-  // Decorative ambient glow anchoring the photo
+  &.float-right { padding-left: 1.5rem; }
+  &.float-left  { padding-right: 1.5rem; }
+
+  // The plate frame — a thin oxblood corner mark, top-left
   &::before {
     content: "";
     position: absolute;
-    top: -24px;
-    right: -24px;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: radial-gradient(circle, var(--global-theme-color) 0%, transparent 68%);
-    opacity: 0.1;
+    top: -10px;
+    left: 0;
+    width: 22px;
+    height: 22px;
+    border-top: 1.5px solid var(--accent);
+    border-left: 1.5px solid var(--accent);
     pointer-events: none;
-    z-index: 0;
+    z-index: 2;
+  }
+  &.float-right::before { left: 1.5rem; }
+  // bottom-right corner mark
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 22px;
+    height: 22px;
+    border-bottom: 1.5px solid var(--accent);
+    border-right: 1.5px solid var(--accent);
+    pointer-events: none;
+    z-index: 2;
   }
 
-  // Image / comparison slider — subtle elevation and rounded corners
   img-comparison-slider {
     display: block;
-    border-radius: 10px;
+    border-radius: 2px;
     overflow: hidden;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13);
-    transition: box-shadow 0.3s ease;
+    filter: contrast(1.04) saturate(0.95);
+    box-shadow:
+      0 1px 0 var(--ink-faint),
+      0 18px 36px -20px rgba(21, 20, 15, 0.35);
+    transition: filter 0.4s ease, box-shadow 0.4s ease;
 
     &:hover {
-      box-shadow: 0 10px 36px rgba(0, 0, 0, 0.2);
+      filter: contrast(1.08) saturate(1);
+      box-shadow:
+        0 1px 0 var(--accent),
+        0 22px 44px -18px rgba(21, 20, 15, 0.4);
     }
   }
 
-
-  // Fallback for plain image (when no compare image is set)
   .img-fluid.z-depth-1 {
-    border-radius: 10px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13) !important;
-    transition: box-shadow 0.3s ease;
+    border-radius: 2px !important;
+    filter: contrast(1.04) saturate(0.95);
+    box-shadow:
+      0 1px 0 var(--ink-faint),
+      0 18px 36px -20px rgba(21, 20, 15, 0.35) !important;
+    transition: filter 0.4s ease, box-shadow 0.4s ease;
 
     &:hover {
-      box-shadow: 0 10px 36px rgba(0, 0, 0, 0.2) !important;
+      filter: contrast(1.08) saturate(1);
+      box-shadow:
+        0 1px 0 var(--accent),
+        0 22px 44px -18px rgba(21, 20, 15, 0.4) !important;
     }
   }
 
-  // More-info block: styled as a small info card
+  // The "plate" caption (renders out the more_info, plus added monospace caption)
   .more-info {
-    margin-top: 1.1rem;
-    padding: 0.75rem 1rem;
-    background-color: var(--global-card-bg-color);
-    border: 1px solid var(--global-divider-color);
-    border-radius: 8px;
-    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-    font-size: 0.78rem;
+    margin-top: 0.9rem;
+    padding: 0.55rem 0 0;
+    border-top: 0.5px solid var(--ink-faint);
+    background: transparent;
+    font-family: var(--mono);
+    font-size: 0.7rem;
     line-height: 1.7;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+    position: relative;
+
+    &::before {
+      content: "PLATE I.";
+      display: block;
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      font-size: 0.62rem;
+      margin-bottom: 0.4rem;
+    }
 
     p {
-      display: block;
       margin: 0;
-      color: var(--global-text-color-light);
+      color: var(--ink-mute);
     }
   }
-}
-
-// ── Theme: warm cream bg + dusty violet accent ─────────────────────────────────
-
-:root {
-  // Background: warm off-white instead of pure white
-  --global-bg-color: #f9f8f5;
-  --global-card-bg-color: #ffffff;
-  --global-newsletter-bg-color: #ffffff;
-
-  // Accent: dusty violet replaces neon purple
-  --global-theme-color: #6d28d9;
-  --global-hover-color: #6d28d9;
-
-  // Code bg: violet tint instead of neon purple tint
-  --global-code-bg-color: rgba(109, 40, 217, 0.05);
-
-  // Highlight sweep: soft violet wash, matches the theme
-  --highlight-tint: rgba(109, 40, 217, 0.11);
-  --highlight-tint-hover: rgba(109, 40, 217, 0.2);
-}
-
-html[data-theme="dark"] {
-  // Dark bg stays near-black — no change needed
-  // Accent: light violet replaces cyan in dark mode
-  --global-theme-color: #c4b5fd;
-  --global-hover-color: #c4b5fd;
-
-  // Code bg: violet tint for dark mode
-  --global-code-bg-color: rgba(196, 181, 253, 0.08);
-
-  // Highlight sweep: soft lavender on dark bg
-  --highlight-tint: rgba(196, 181, 253, 0.13);
-  --highlight-tint-hover: rgba(196, 181, 253, 0.24);
 }
 
 // ── Bio content (the clearfix div holding {{ content }}) ───────────────────────
 
 .post article > .clearfix {
+  font-family: var(--serif-body);
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 18;
+
   p {
-    font-size: 1rem;
-    line-height: 1.82;
-    margin-bottom: 1.1rem;
+    font-size: 1.04rem;
+    line-height: 1.78;
+    margin-bottom: 1.15rem;
+    color: var(--ink-soft);
+    text-align: left;
+    hyphens: auto;
+  }
 
-    // Slightly larger first paragraph
-    &:first-of-type {
-      font-size: 1.04rem;
+  // Drop cap on the very first paragraph
+  > p:first-of-type {
+    font-size: 1.08rem;
+
+    &::first-letter {
+      font-family: var(--serif-display);
+      font-variation-settings: "opsz" 144, "SOFT" 50, "wght" 500;
+      font-weight: 500;
+      font-size: 4.2em;
+      line-height: 0.84;
+      float: left;
+      padding: 0.06em 0.12em 0 0;
+      margin-right: 0.04em;
+      color: var(--accent);
     }
+  }
 
-    // Inline links: clean underline-on-hover instead of permanent underline
-    a {
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s ease, color 0.2s ease;
+  p a {
+    color: var(--ink);
+    text-decoration: none;
+    background-image: linear-gradient(to right, var(--accent), var(--accent));
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 1px;
+    padding-bottom: 1px;
+    transition: background-size 0.25s ease, color 0.2s ease, background-color 0.2s ease;
 
-      &:hover {
-        border-bottom-color: var(--global-theme-color);
-        text-decoration: none;
-      }
+    &:hover {
+      color: var(--accent);
+      background-size: 100% 2px;
+      background-color: var(--accent-tint);
     }
+  }
 
-    // Bold terms: letter-by-letter bold reveal, staggered via --ci
-    strong {
+  // Bold terms — keep the staggered letter reveal but use weight + ink tone
+  p strong {
+    display: inline;
+    color: var(--ink);
+    font-weight: 600;
+
+    span {
       display: inline;
+      font-weight: 400;
+      color: var(--ink-soft);
+      transition: color 0.18s ease;
 
-      span {
-        display: inline;
-        font-weight: 400;
-
-        &.is-bold {
-          font-weight: 700;
-        }
+      &.is-bold {
+        font-weight: 600;
+        color: var(--ink);
       }
     }
   }
+
+  em { font-style: italic; color: var(--ink-soft); }
 }
 
 // ── Section headings (news / latest posts / selected papers) ───────────────────
-// These are the direct <h2> children of the about article, not headings inside
-// the bio markdown. The a tags inside them carry inline `style="color:inherit"`.
+// Numbered as § 01, § 02 … via CSS counter on the article.
+
+.post article {
+  counter-reset: section;
+}
 
 .post article > h2 {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--global-text-color-light) !important;
-  margin-top: 3rem;
-  margin-bottom: 1.25rem;
-  padding-bottom: 0.6rem;
-  border-bottom: 1.5px solid var(--global-divider-color);
+  counter-increment: section;
+  font-family: var(--serif-display);
+  font-variation-settings: "opsz" 144, "SOFT" 60, "wght" 380;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 2.0rem;
+  letter-spacing: -0.01em;
+  color: var(--ink) !important;
+  margin: 3.2rem 0 1.4rem;
+  padding: 0;
+  border: 0;
   position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
 
-  // A short accent rule in the theme color at the start of the bottom border
+  &::before {
+    content: "§ " counter(section, decimal-leading-zero);
+    font-family: var(--mono);
+    font-style: normal;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    flex-shrink: 0;
+    transform: translateY(-0.3em);
+  }
+
   &::after {
     content: "";
-    position: absolute;
-    bottom: -1.5px;
-    left: 0;
-    width: 2rem;
-    height: 1.5px;
-    background-color: var(--global-theme-color);
-    border-radius: 1px;
+    flex-grow: 1;
+    height: 0;
+    border-top: 0.5px solid var(--ink-faint);
+    transform: translateY(-0.3em);
   }
 
   a {
     color: inherit !important;
     text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover { color: var(--accent) !important; }
   }
 }
 
-// ── News / Latest-posts table ──────────────────────────────────────────────────
+// ── News / Latest-posts table ─ rendered as editorial dispatches ───────────────
 
 .news {
-  .table-responsive {
-    border-radius: 6px;
-  }
+  margin-bottom: 1rem;
+
+  .table-responsive { overflow: visible; }
 
   table.table {
+    margin-bottom: 0;
+    border-collapse: collapse;
+
     tr {
-      transition: background-color 0.14s ease;
+      border-bottom: 0.5px solid var(--ink-faint);
+      transition: background-color 0.2s ease;
+
+      &:first-child { border-top: 0.5px solid var(--ink-faint); }
 
       &:hover {
-        // color-mix() is supported in all evergreen browsers (Chrome 111+, FF 113+, Safari 16.2+)
-        background-color: color-mix(in srgb, var(--global-theme-color) 6%, transparent);
+        background-color: var(--accent-tint);
+
+        th[scope="row"] { color: var(--accent); }
       }
     }
 
     th[scope="row"] {
-      font-size: 0.76rem;
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-family: var(--mono);
+      font-size: 0.72rem;
       font-weight: 500;
-      color: var(--global-text-color-light);
+      color: var(--ink-mute);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       white-space: nowrap;
-      padding-top: 0.8rem;
-      padding-bottom: 0.8rem;
-      vertical-align: middle;
-      letter-spacing: 0.01em;
+      padding: 0.95rem 1.2rem 0.95rem 0.4rem;
+      vertical-align: baseline;
+      width: 1%;
+      border: none;
+      transition: color 0.2s ease;
     }
 
     td {
-      font-size: 0.9rem;
+      font-family: var(--serif-body);
+      font-size: 0.98rem;
       line-height: 1.55;
-      padding-top: 0.8rem;
-      padding-bottom: 0.8rem;
-      vertical-align: middle;
+      color: var(--ink-soft);
+      padding: 0.95rem 0.4rem;
+      vertical-align: baseline;
+      border: none;
 
-      a.news-title {
-        color: var(--global-text-color);
+      a {
+        color: var(--ink);
         text-decoration: none;
-        font-weight: 500;
-        transition: color 0.2s ease;
+        background-image: linear-gradient(to right, var(--accent), var(--accent));
+        background-position: 0 100%;
+        background-repeat: no-repeat;
+        background-size: 0% 1px;
+        padding-bottom: 1px;
+        transition: background-size 0.3s ease, color 0.2s ease;
 
         &:hover {
-          color: var(--global-theme-color);
+          color: var(--accent);
+          background-size: 100% 1px;
         }
+      }
+
+      a.news-title {
+        font-weight: 500;
+        color: var(--ink);
       }
     }
   }
 }
 
-// ── Social icons ───────────────────────────────────────────────────────────────
+// ── Featured-posts cards ───────────────────────────────────────────────────────
+
+.featured-posts {
+  margin-top: 0.5rem;
+
+  .card {
+    background-color: transparent !important;
+    border: 0 !important;
+    border-top: 0.5px solid var(--ink-faint) !important;
+    border-radius: 0 !important;
+    transition: background-color 0.22s ease;
+
+    &:hover {
+      background-color: var(--accent-tint);
+
+      .card-title { color: var(--accent); }
+    }
+
+    .card-title {
+      font-family: var(--serif-display);
+      font-variation-settings: "opsz" 36, "SOFT" 40, "wght" 450;
+      font-weight: 450;
+      font-size: 1.1rem;
+      letter-spacing: -0.005em;
+      color: var(--ink);
+      transition: color 0.2s ease;
+    }
+
+    .card-text {
+      font-family: var(--serif-body);
+      font-style: italic;
+      color: var(--ink-mute);
+      font-size: 0.92rem;
+    }
+  }
+}
+
+// ── Social icons & contact note ────────────────────────────────────────────────
 
 .social {
-  margin-top: 2.25rem;
+  margin-top: 3rem;
+  text-align: center;
+  padding: 1.5rem 0;
+  border-top: 0.5px solid var(--ink-faint);
+  border-bottom: 0.5px solid var(--ink-faint);
+  position: relative;
+
+  &::before {
+    content: "✦";
+    position: absolute;
+    top: -0.7em;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--paper);
+    padding: 0 0.6em;
+    color: var(--accent);
+    font-size: 0.9rem;
+  }
 
   .contact-icons {
     a {
       display: inline-block;
-      transition: transform 0.2s ease;
+      margin: 0 0.45rem;
+      color: var(--ink-soft);
+      transition: color 0.2s ease, transform 0.2s ease;
 
       &:hover {
-        transform: translateY(-4px);
+        color: var(--accent);
+        transform: translateY(-3px);
       }
     }
   }
 
   .contact-note {
-    margin-top: 0.5rem;
-    font-size: 0.78rem;
-    color: var(--global-text-color-light);
+    margin-top: 0.7rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-mute);
   }
 }
 
-// ── Featured-posts cards (latest posts section) ────────────────────────────────
+// ── ClustrMaps globe — center & frame ──────────────────────────────────────────
 
-.featured-posts {
-  .card {
-    border: 1px solid var(--global-divider-color) !important;
-    border-radius: 10px !important;
-    transition: box-shadow 0.22s ease, transform 0.22s ease;
-
-    &:hover {
-      box-shadow: 0 6px 22px rgba(0, 0, 0, 0.1);
-      transform: translateY(-2px);
-    }
-  }
+#clstr_globe {
+  display: block;
+  margin: 1.5rem auto;
+  filter: contrast(1.05) sepia(0.15) hue-rotate(-15deg);
 }
 
-// ── Scroll-reveal ──────────────────────────────────────────────────────────────
+// ── Scroll-reveal — kept for news rows / cards ─────────────────────────────────
 
 .reveal {
   opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.48s ease, transform 0.48s ease;
+  transform: translateY(10px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
 }
-
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-// ── ClustrMaps globe centering ─────────────────────────────────────────────────
+// ── Footer adjustments ─────────────────────────────────────────────────────────
 
-#clstr_globe {
-  display: block;
-  margin: 0 auto;
+footer {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+
+  a { color: inherit; }
 }
 
-// ── Responsive tweaks ──────────────────────────────────────────────────────────
+// ── Responsive ─────────────────────────────────────────────────────────────────
 
 @media (max-width: 768px) {
-  .post-header .post-title {
-    font-size: 2.1rem;
+  .post-header {
+    margin-bottom: 2rem;
+    .post-title { font-size: clamp(2rem, 9vw, 3rem); }
+    .desc { font-size: 0.95rem; }
+  }
+  .post article > h2 {
+    font-size: 1.55rem;
+    margin-top: 2.4rem;
+  }
+  .masthead .masthead-meta {
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    gap: 0.35rem 0.7rem;
   }
 }
 
 @media (max-width: 576px) {
+  body { font-size: 0.98rem; }
   .post-header {
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-
-    .post-title {
-      font-size: 1.8rem;
-    }
+    .post-title { font-size: 2rem; }
   }
-
-  .post article > h2 {
-    font-size: 0.68rem;
+  .post article > .clearfix > p:first-of-type::first-letter {
+    font-size: 3.5em;
   }
 }

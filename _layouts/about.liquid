@@ -2,8 +2,25 @@
 layout: default
 ---
 <div class="post">
+  <div class="editorial-folio">FOL. 01 — ABOUT</div>
+
+  <!-- Masthead -->
+  <div class="masthead">
+    <div class="masthead-rule"></div>
+    <div class="masthead-meta">
+      <span>VOLUME · IV</span>
+      <span class="sep">·</span>
+      <span>ISSUE · I</span>
+      <span class="ornament">⁂</span>
+      <span>APRIL · MMXXVI</span>
+      <span class="sep">·</span>
+      <span>NEW YORK</span>
+    </div>
+    <div class="masthead-rule thin"></div>
+  </div>
+
   <header class="post-header">
-    <h1 class="post-title">
+    <h1 class="post-title" style="visibility: hidden;">
       {% if site.title == 'blank' %}
         <span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }}
         {{ site.last_name }}
@@ -11,7 +28,76 @@ layout: default
         {{ site.title }}
       {% endif %}
     </h1>
-    <p class="desc">{{ page.subtitle }}</p>
+    <script>
+      (function () {
+        const titleEl = document.currentScript.previousElementSibling;
+        if (!titleEl || !titleEl.classList.contains('post-title')) return;
+
+        const segment = (text) => {
+          if (typeof Intl !== 'undefined' && Intl.Segmenter) {
+            const seg = new Intl.Segmenter(undefined, { granularity: 'grapheme' });
+            return Array.from(seg.segment(text), (s) => s.segment);
+          }
+          return Array.from(text);
+        };
+
+        let counter = 0;
+        // Normalize like the browser would: collapse runs of whitespace to a
+        // single space so Liquid indentation between tags doesn't produce
+        // stray nbsp characters in the title.
+        const wrapTextNode = (node) => {
+          const collapsed = node.nodeValue.replace(/\s+/g, ' ');
+          if (collapsed === ' ' || collapsed === '') {
+            // Pure-whitespace node between elements — keep one space if there's
+            // visible content on both sides; otherwise drop it.
+            const prev = node.previousSibling;
+            const next = node.nextSibling;
+            if (prev && next) {
+              const span = document.createElement('span');
+              span.className = 'post-title-char';
+              span.style.setProperty('--ci', String(counter++));
+              span.innerHTML = '&nbsp;';
+              node.parentNode.replaceChild(span, node);
+            } else {
+              node.parentNode.removeChild(node);
+            }
+            return;
+          }
+          const parts = segment(collapsed);
+          const frag = document.createDocumentFragment();
+          parts.forEach((part) => {
+            const span = document.createElement('span');
+            span.className = 'post-title-char';
+            span.style.setProperty('--ci', String(counter++));
+            if (part === ' ') {
+              span.innerHTML = '&nbsp;';
+            } else {
+              span.textContent = part;
+            }
+            frag.appendChild(span);
+          });
+          node.parentNode.replaceChild(frag, node);
+        };
+
+        const walk = (el) => {
+          const children = Array.from(el.childNodes);
+          children.forEach((child) => {
+            if (child.nodeType === Node.TEXT_NODE) {
+              if (child.nodeValue && child.nodeValue.length) {
+                wrapTextNode(child);
+              }
+            } else if (child.nodeType === Node.ELEMENT_NODE) {
+              walk(child);
+            }
+          });
+        };
+
+        walk(titleEl);
+        titleEl.style.visibility = 'visible';
+      })();
+    </script>
+    <p class="desc">— {{ page.subtitle }}</p>
+    <div class="post-header-chop" aria-hidden="true">黄泓嘉</div>
   </header>
 
   <article>
