@@ -165,7 +165,6 @@ layout: default
       {% include newsletter.liquid center=true %}
     {% endif %}
 
-
     <script>
       const segmentText = (text) => {
         if (typeof Intl !== 'undefined' && Intl.Segmenter) {
@@ -211,16 +210,16 @@ layout: default
           el.replaceChildren(fragment);
 
           spans.forEach((span, index) => {
-            window.setTimeout(() => {
-              span.classList.add('is-bold');
-            }, baseDelayMs + index * stepDelayMs);
+            window.setTimeout(
+              () => {
+                span.classList.add('is-bold');
+              },
+              baseDelayMs + index * stepDelayMs
+            );
           });
 
           // Fallback: force completion in case timers are throttled.
-          window.setTimeout(
-            () => spans.forEach((span) => span.classList.add('is-bold')),
-            baseDelayMs + spans.length * stepDelayMs + 150
-          );
+          window.setTimeout(() => spans.forEach((span) => span.classList.add('is-bold')), baseDelayMs + spans.length * stepDelayMs + 150);
         });
       };
 
@@ -311,7 +310,6 @@ layout: default
       } else {
         initComparisonSliders();
       }
-
     </script>
   </article>
 </div>

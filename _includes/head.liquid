@@ -124,8 +124,10 @@
 
 {% if page.images %}
   {% if page.images.compare %}
-    <!-- Image comparison slider — load JS here (blocking) so the custom element
-         is registered before first paint, eliminating any flash or layout shift. -->
+    <!--
+      Image comparison slider — load JS here (blocking) so the custom element
+      is registered before first paint, eliminating any flash or layout shift.
+    -->
     <link
       rel="stylesheet"
       href="{{ site.third_party_libraries.img-comparison-slider.url.css }}"

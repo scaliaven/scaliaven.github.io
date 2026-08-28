@@ -1,144 +1,473 @@
 <!-- _includes/splash.html -->
-<div id="site-splash" style="position:fixed;inset:0;z-index:9999;background:#ffffff;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.7s ease;opacity:0;visibility:hidden;pointer-events:none;">
-
+<div
+  id="site-splash"
+  style="
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.7s ease;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  "
+>
   <!-- top hairline rule -->
-  <div id="splash-rule-top" style="width:280px;height:1px;background:#000000;transform:scaleX(0);transform-origin:left center;transition:transform 0.7s ease;margin-bottom:24px;"></div>
+  <div
+    id="splash-rule-top"
+    style="
+      width: 280px;
+      height: 1px;
+      background: #000000;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.7s ease;
+      margin-bottom: 24px;
+    "
+  ></div>
 
   <!-- masthead name -->
-  <div id="splash-name" style="font-family:'Fraunces','Cormorant Garamond',Georgia,serif;font-size:clamp(2.6rem,7vw,4.4rem);letter-spacing:-0.02em;color:#000000;font-style:italic;line-height:1.05;margin-bottom:22px;white-space:nowrap;">
-    <span class="splash-char" data-w="400" style="display:inline-block;font-variation-settings:'opsz' 144,'SOFT' 50,'wght' 400;font-weight:400;opacity:0;transform:translateY(0.3em) rotate(-2deg);transition:opacity 0.55s ease,transform 0.55s cubic-bezier(0.2,0.8,0.3,1);">H</span><span class="splash-char" data-w="400" style="display:inline-block;font-variation-settings:'opsz' 144,'SOFT' 50,'wght' 400;font-weight:400;opacity:0;transform:translateY(0.3em) rotate(1.4deg);transition:opacity 0.55s ease,transform 0.55s cubic-bezier(0.2,0.8,0.3,1);">o</span><span class="splash-char" data-w="400" style="display:inline-block;font-variation-settings:'opsz' 144,'SOFT' 50,'wght' 400;font-weight:400;opacity:0;transform:translateY(0.3em) rotate(-1.1deg);transition:opacity 0.55s ease,transform 0.55s cubic-bezier(0.2,0.8,0.3,1);">n</span><span class="splash-char" data-w="400" style="display:inline-block;font-variation-settings:'opsz' 144,'SOFT' 50,'wght' 400;font-weight:400;opacity:0;transform:translateY(0.3em) rotate(2deg);transition:opacity 0.55s ease,transform 0.55s cubic-bezier(0.2,0.8,0.3,1);">g</span><span class="splash-char" data-w="400" style="display:inline-block;font-variation-settings:'opsz' 144,'SOFT' 50,'wght' 400;font-weight:400;opacity:0;transform:translateY(0.3em) rotate(-1.6deg);transition:opacity 0.55s ease,transform 0.55s cubic-bezier(0.2,0.8,0.3,1);">j</span><span class="splash-char" data-w="400" style="display:inline-block;font-variation-settings:'opsz' 144,'SOFT' 50,'wght' 400;font-weight:400;opacity:0;transform:translateY(0.3em) rotate(1.2deg);transition:opacity 0.55s ease,transform 0.55s cubic-bezier(0.2,0.8,0.3,1);">i</span><span class="splash-char" data-w="400" style="display:inline-block;font-variation-settings:'opsz' 144,'SOFT' 50,'wght' 400;font-weight:400;opacity:0;transform:translateY(0.3em) rotate(-0.8deg);transition:opacity 0.55s ease,transform 0.55s cubic-bezier(0.2,0.8,0.3,1);">a</span><span class="splash-char" data-w="400" style="display:inline-block;width:0.32em;font-variation-settings:'opsz' 144,'SOFT' 50,'wght' 400;font-weight:400;opacity:0;transform:translateY(0.3em);transition:opacity 0.55s ease,transform 0.55s cubic-bezier(0.2,0.8,0.3,1);">&nbsp;</span><span class="splash-char" data-w="600" style="display:inline-block;font-variation-settings:'opsz' 144,'SOFT' 0,'wght' 600;font-weight:600;opacity:0;transform:translateY(0.3em) rotate(1.6deg);transition:opacity 0.55s ease,transform 0.55s cubic-bezier(0.2,0.8,0.3,1);">H</span><span class="splash-char" data-w="600" style="display:inline-block;font-variation-settings:'opsz' 144,'SOFT' 0,'wght' 600;font-weight:600;opacity:0;transform:translateY(0.3em) rotate(-1.3deg);transition:opacity 0.55s ease,transform 0.55s cubic-bezier(0.2,0.8,0.3,1);">u</span><span class="splash-char" data-w="600" style="display:inline-block;font-variation-settings:'opsz' 144,'SOFT' 0,'wght' 600;font-weight:600;opacity:0;transform:translateY(0.3em) rotate(1.8deg);transition:opacity 0.55s ease,transform 0.55s cubic-bezier(0.2,0.8,0.3,1);">a</span><span class="splash-char" data-w="600" style="display:inline-block;font-variation-settings:'opsz' 144,'SOFT' 0,'wght' 600;font-weight:600;opacity:0;transform:translateY(0.3em) rotate(-1.7deg);transition:opacity 0.55s ease,transform 0.55s cubic-bezier(0.2,0.8,0.3,1);">n</span><span class="splash-char" data-w="600" style="display:inline-block;font-variation-settings:'opsz' 144,'SOFT' 0,'wght' 600;font-weight:600;opacity:0;transform:translateY(0.3em) rotate(1.1deg);transition:opacity 0.55s ease,transform 0.55s cubic-bezier(0.2,0.8,0.3,1);">g</span>
+  <div
+    id="splash-name"
+    style="
+      font-family: &quot;Fraunces&quot;, &quot;Cormorant Garamond&quot;, Georgia, serif;
+      font-size: clamp(2.6rem, 7vw, 4.4rem);
+      letter-spacing: -0.02em;
+      color: #000000;
+      font-style: italic;
+      line-height: 1.05;
+      margin-bottom: 22px;
+      white-space: nowrap;
+    "
+  >
+    <span
+      class="splash-char"
+      data-w="400"
+      style="
+        display: inline-block;
+        font-variation-settings:
+          &quot;opsz&quot; 144,
+          &quot;SOFT&quot; 50,
+          &quot;wght&quot; 400;
+        font-weight: 400;
+        opacity: 0;
+        transform: translateY(0.3em) rotate(-2deg);
+        transition:
+          opacity 0.55s ease,
+          transform 0.55s cubic-bezier(0.2, 0.8, 0.3, 1);
+      "
+      >H</span
+    ><span
+      class="splash-char"
+      data-w="400"
+      style="
+        display: inline-block;
+        font-variation-settings:
+          &quot;opsz&quot; 144,
+          &quot;SOFT&quot; 50,
+          &quot;wght&quot; 400;
+        font-weight: 400;
+        opacity: 0;
+        transform: translateY(0.3em) rotate(1.4deg);
+        transition:
+          opacity 0.55s ease,
+          transform 0.55s cubic-bezier(0.2, 0.8, 0.3, 1);
+      "
+      >o</span
+    ><span
+      class="splash-char"
+      data-w="400"
+      style="
+        display: inline-block;
+        font-variation-settings:
+          &quot;opsz&quot; 144,
+          &quot;SOFT&quot; 50,
+          &quot;wght&quot; 400;
+        font-weight: 400;
+        opacity: 0;
+        transform: translateY(0.3em) rotate(-1.1deg);
+        transition:
+          opacity 0.55s ease,
+          transform 0.55s cubic-bezier(0.2, 0.8, 0.3, 1);
+      "
+      >n</span
+    ><span
+      class="splash-char"
+      data-w="400"
+      style="
+        display: inline-block;
+        font-variation-settings:
+          &quot;opsz&quot; 144,
+          &quot;SOFT&quot; 50,
+          &quot;wght&quot; 400;
+        font-weight: 400;
+        opacity: 0;
+        transform: translateY(0.3em) rotate(2deg);
+        transition:
+          opacity 0.55s ease,
+          transform 0.55s cubic-bezier(0.2, 0.8, 0.3, 1);
+      "
+      >g</span
+    ><span
+      class="splash-char"
+      data-w="400"
+      style="
+        display: inline-block;
+        font-variation-settings:
+          &quot;opsz&quot; 144,
+          &quot;SOFT&quot; 50,
+          &quot;wght&quot; 400;
+        font-weight: 400;
+        opacity: 0;
+        transform: translateY(0.3em) rotate(-1.6deg);
+        transition:
+          opacity 0.55s ease,
+          transform 0.55s cubic-bezier(0.2, 0.8, 0.3, 1);
+      "
+      >j</span
+    ><span
+      class="splash-char"
+      data-w="400"
+      style="
+        display: inline-block;
+        font-variation-settings:
+          &quot;opsz&quot; 144,
+          &quot;SOFT&quot; 50,
+          &quot;wght&quot; 400;
+        font-weight: 400;
+        opacity: 0;
+        transform: translateY(0.3em) rotate(1.2deg);
+        transition:
+          opacity 0.55s ease,
+          transform 0.55s cubic-bezier(0.2, 0.8, 0.3, 1);
+      "
+      >i</span
+    ><span
+      class="splash-char"
+      data-w="400"
+      style="
+        display: inline-block;
+        font-variation-settings:
+          &quot;opsz&quot; 144,
+          &quot;SOFT&quot; 50,
+          &quot;wght&quot; 400;
+        font-weight: 400;
+        opacity: 0;
+        transform: translateY(0.3em) rotate(-0.8deg);
+        transition:
+          opacity 0.55s ease,
+          transform 0.55s cubic-bezier(0.2, 0.8, 0.3, 1);
+      "
+      >a</span
+    ><span
+      class="splash-char"
+      data-w="400"
+      style="
+        display: inline-block;
+        width: 0.32em;
+        font-variation-settings:
+          &quot;opsz&quot; 144,
+          &quot;SOFT&quot; 50,
+          &quot;wght&quot; 400;
+        font-weight: 400;
+        opacity: 0;
+        transform: translateY(0.3em);
+        transition:
+          opacity 0.55s ease,
+          transform 0.55s cubic-bezier(0.2, 0.8, 0.3, 1);
+      "
+      >&nbsp;</span
+    ><span
+      class="splash-char"
+      data-w="600"
+      style="
+        display: inline-block;
+        font-variation-settings:
+          &quot;opsz&quot; 144,
+          &quot;SOFT&quot; 0,
+          &quot;wght&quot; 600;
+        font-weight: 600;
+        opacity: 0;
+        transform: translateY(0.3em) rotate(1.6deg);
+        transition:
+          opacity 0.55s ease,
+          transform 0.55s cubic-bezier(0.2, 0.8, 0.3, 1);
+      "
+      >H</span
+    ><span
+      class="splash-char"
+      data-w="600"
+      style="
+        display: inline-block;
+        font-variation-settings:
+          &quot;opsz&quot; 144,
+          &quot;SOFT&quot; 0,
+          &quot;wght&quot; 600;
+        font-weight: 600;
+        opacity: 0;
+        transform: translateY(0.3em) rotate(-1.3deg);
+        transition:
+          opacity 0.55s ease,
+          transform 0.55s cubic-bezier(0.2, 0.8, 0.3, 1);
+      "
+      >u</span
+    ><span
+      class="splash-char"
+      data-w="600"
+      style="
+        display: inline-block;
+        font-variation-settings:
+          &quot;opsz&quot; 144,
+          &quot;SOFT&quot; 0,
+          &quot;wght&quot; 600;
+        font-weight: 600;
+        opacity: 0;
+        transform: translateY(0.3em) rotate(1.8deg);
+        transition:
+          opacity 0.55s ease,
+          transform 0.55s cubic-bezier(0.2, 0.8, 0.3, 1);
+      "
+      >a</span
+    ><span
+      class="splash-char"
+      data-w="600"
+      style="
+        display: inline-block;
+        font-variation-settings:
+          &quot;opsz&quot; 144,
+          &quot;SOFT&quot; 0,
+          &quot;wght&quot; 600;
+        font-weight: 600;
+        opacity: 0;
+        transform: translateY(0.3em) rotate(-1.7deg);
+        transition:
+          opacity 0.55s ease,
+          transform 0.55s cubic-bezier(0.2, 0.8, 0.3, 1);
+      "
+      >n</span
+    ><span
+      class="splash-char"
+      data-w="600"
+      style="
+        display: inline-block;
+        font-variation-settings:
+          &quot;opsz&quot; 144,
+          &quot;SOFT&quot; 0,
+          &quot;wght&quot; 600;
+        font-weight: 600;
+        opacity: 0;
+        transform: translateY(0.3em) rotate(1.1deg);
+        transition:
+          opacity 0.55s ease,
+          transform 0.55s cubic-bezier(0.2, 0.8, 0.3, 1);
+      "
+      >g</span
+    >
   </div>
 
   <!-- accent chop -->
-  <div id="splash-chop" style="font-family:'Fraunces','Cormorant Garamond',Georgia,serif;font-size:1.05rem;letter-spacing:0.45em;color:#b509ac;border:1px solid #b509ac;padding:0.35em 0.85em 0.35em 1.30em;border-radius:2px;opacity:0;transform:scale(1.4) rotate(-3deg);transition:opacity 0.55s ease,transform 0.55s cubic-bezier(0.3,1.5,0.6,1);margin-bottom:24px;">
+  <div
+    id="splash-chop"
+    style="
+      font-family: &quot;Fraunces&quot;, &quot;Cormorant Garamond&quot;, Georgia, serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.45em;
+      color: #b509ac;
+      border: 1px solid #b509ac;
+      padding: 0.35em 0.85em 0.35em 1.3em;
+      border-radius: 2px;
+      opacity: 0;
+      transform: scale(1.4) rotate(-3deg);
+      transition:
+        opacity 0.55s ease,
+        transform 0.55s cubic-bezier(0.3, 1.5, 0.6, 1);
+      margin-bottom: 24px;
+    "
+  >
     <span>黄</span><span>泓</span><span>嘉</span>
   </div>
 
   <!-- bottom hairline rule -->
-  <div id="splash-rule-bot" style="width:280px;height:1px;background:#000000;transform:scaleX(0);transform-origin:left center;transition:transform 0.7s ease;margin-bottom:18px;"></div>
+  <div
+    id="splash-rule-bot"
+    style="
+      width: 280px;
+      height: 1px;
+      background: #000000;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.7s ease;
+      margin-bottom: 18px;
+    "
+  ></div>
 
   <!-- enter affordance -->
-  <div id="splash-enter" style="font-family:'JetBrains Mono',Consolas,Menlo,monospace;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:#828282;opacity:0;transition:opacity 0.55s ease;">
+  <div
+    id="splash-enter"
+    style="
+      font-family: &quot;JetBrains Mono&quot;, Consolas, Menlo, monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #828282;
+      opacity: 0;
+      transition: opacity 0.55s ease;
+    "
+  >
     [ TAP OR PRESS ANY KEY ]
   </div>
 </div>
 
 <style>
   @keyframes splashEnterPulse {
-    0%, 100% { opacity: 0.4; }
-    50%      { opacity: 0.85; }
+    0%,
+    100% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 0.85;
+    }
   }
-  html[data-theme="dark"] #site-splash { background: #1c1c1d; }
+  html[data-theme="dark"] #site-splash {
+    background: #1c1c1d;
+  }
   html[data-theme="dark"] #splash-rule-top,
-  html[data-theme="dark"] #splash-rule-bot { background: #e8e8e8; }
-  html[data-theme="dark"] #splash-name { color: #e8e8e8; }
-  html[data-theme="dark"] #splash-chop { color: #2698ba; border-color: #2698ba; }
+  html[data-theme="dark"] #splash-rule-bot {
+    background: #e8e8e8;
+  }
+  html[data-theme="dark"] #splash-name {
+    color: #e8e8e8;
+  }
+  html[data-theme="dark"] #splash-chop {
+    color: #2698ba;
+    border-color: #2698ba;
+  }
 </style>
 
 <script>
-(function() {
-  var splash    = document.getElementById('site-splash');
-  var ruleTop   = document.getElementById('splash-rule-top');
-  var ruleBot   = document.getElementById('splash-rule-bot');
-  var chars     = document.querySelectorAll('#splash-name .splash-char');
-  var chop      = document.getElementById('splash-chop');
-  var enterAff  = document.getElementById('splash-enter');
-  var splashSeenKey = 'site-splash-seen';
-  var dismissed = false;
+  (function () {
+    var splash = document.getElementById("site-splash");
+    var ruleTop = document.getElementById("splash-rule-top");
+    var ruleBot = document.getElementById("splash-rule-bot");
+    var chars = document.querySelectorAll("#splash-name .splash-char");
+    var chop = document.getElementById("splash-chop");
+    var enterAff = document.getElementById("splash-enter");
+    var splashSeenKey = "site-splash-seen";
+    var dismissed = false;
 
-  function shouldShowSplash() {
-    try {
-      if (window.sessionStorage.getItem(splashSeenKey) === '1') {
-        return false;
-      }
-      window.sessionStorage.setItem(splashSeenKey, '1');
-      return true;
-    } catch (e) {
-      return true;
-    }
-  }
-
-  var showSplash = shouldShowSplash();
-
-  if (!showSplash) {
-    if (splash && splash.parentNode) {
-      splash.remove();
-    }
-  }
-
-  function dismiss() {
-    if (dismissed || !splash) return;
-    dismissed = true;
-    splash.style.opacity = '0';
-    splash.style.pointerEvents = 'none';
-    setTimeout(function() { if (splash.parentNode) splash.remove(); }, 700);
-  }
-
-  function skip() {
-    if (dismissed || !splash) return;
-    dismissed = true;
-    splash.style.transition = 'opacity 0.35s ease';
-    splash.style.opacity = '0';
-    splash.style.pointerEvents = 'none';
-    setTimeout(function() { if (splash.parentNode) splash.remove(); }, 380);
-  }
-
-  if (showSplash && splash) {
-    splash.style.visibility = 'visible';
-    splash.style.pointerEvents = 'auto';
-
-    requestAnimationFrame(function() {
-      splash.style.opacity = '1';
-
-      ruleTop.style.transform = 'scaleX(1)';
-
-      var nameStart = 250;
-      var stagger = 38;
-      chars.forEach(function(c, i) {
-        setTimeout(function() {
-          c.style.opacity = '1';
-          c.style.transform = 'translateY(0) rotate(0deg)';
-        }, nameStart + i * stagger);
-      });
-
-      setTimeout(function() {
-        chop.style.opacity = '0.95';
-        chop.style.transform = 'scale(1) rotate(-1.2deg)';
-      }, 1200);
-
-      setTimeout(function() {
-        ruleBot.style.transform = 'scaleX(1)';
-      }, 1500);
-
-      setTimeout(function() {
-        enterAff.style.opacity = '1';
-        enterAff.style.animation = 'splashEnterPulse 1.4s ease-in-out infinite';
-      }, 1750);
-
-      setTimeout(dismiss, 2100);
-    });
-
-    document.addEventListener('keydown', skip, { once: true });
-    splash.addEventListener('click', skip, { once: true });
-  }
-
-  document.addEventListener('DOMContentLoaded', function() {
-    var revealEls = document.querySelectorAll('.news table tr, .featured-posts .card');
-    revealEls.forEach(function(el) { el.classList.add('reveal'); });
-
-    var observer = new IntersectionObserver(function(entries) {
-      var delay = 0;
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          var el = entry.target;
-          setTimeout(function() { el.classList.add('visible'); }, delay);
-          delay += 65;
-          observer.unobserve(el);
+    function shouldShowSplash() {
+      try {
+        if (window.sessionStorage.getItem(splashSeenKey) === "1") {
+          return false;
         }
-      });
-    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+        window.sessionStorage.setItem(splashSeenKey, "1");
+        return true;
+      } catch (e) {
+        return true;
+      }
+    }
 
-    revealEls.forEach(function(el) { observer.observe(el); });
-  });
-})();
+    var showSplash = shouldShowSplash();
+
+    if (!showSplash) {
+      if (splash && splash.parentNode) {
+        splash.remove();
+      }
+    }
+
+    function dismiss() {
+      if (dismissed || !splash) return;
+      dismissed = true;
+      splash.style.opacity = "0";
+      splash.style.pointerEvents = "none";
+      setTimeout(function () {
+        if (splash.parentNode) splash.remove();
+      }, 700);
+    }
+
+    function skip() {
+      if (dismissed || !splash) return;
+      dismissed = true;
+      splash.style.transition = "opacity 0.35s ease";
+      splash.style.opacity = "0";
+      splash.style.pointerEvents = "none";
+      setTimeout(function () {
+        if (splash.parentNode) splash.remove();
+      }, 380);
+    }
+
+    if (showSplash && splash) {
+      splash.style.visibility = "visible";
+      splash.style.pointerEvents = "auto";
+
+      requestAnimationFrame(function () {
+        splash.style.opacity = "1";
+
+        ruleTop.style.transform = "scaleX(1)";
+
+        var nameStart = 250;
+        var stagger = 38;
+        chars.forEach(function (c, i) {
+          setTimeout(
+            function () {
+              c.style.opacity = "1";
+              c.style.transform = "translateY(0) rotate(0deg)";
+            },
+            nameStart + i * stagger
+          );
+        });
+
+        setTimeout(function () {
+          chop.style.opacity = "0.95";
+          chop.style.transform = "scale(1) rotate(-1.2deg)";
+        }, 1200);
+
+        setTimeout(function () {
+          ruleBot.style.transform = "scaleX(1)";
+        }, 1500);
+
+        setTimeout(function () {
+          enterAff.style.opacity = "1";
+          enterAff.style.animation = "splashEnterPulse 1.4s ease-in-out infinite";
+        }, 1750);
+
+        setTimeout(dismiss, 2100);
+      });
+
+      document.addEventListener("keydown", skip, { once: true });
+      splash.addEventListener("click", skip, { once: true });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      var revealEls = document.querySelectorAll(".news table tr, .featured-posts .card");
+      revealEls.forEach(function (el) {
+        el.classList.add("reveal");
+      });
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          var delay = 0;
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var el = entry.target;
+              setTimeout(function () {
+                el.classList.add("visible");
+              }, delay);
+              delay += 65;
+              observer.unobserve(el);
+            }
+          });
+        },
+        { threshold: 0.05, rootMargin: "0px 0px -20px 0px" }
+      );
+
+      revealEls.forEach(function (el) {
+        observer.observe(el);
+      });
+    });
+  })();
 </script>
