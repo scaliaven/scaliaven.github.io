@@ -3,7 +3,7 @@ layout: about
 title: about
 permalink: /
 splash: true
-subtitle: <a href='https://shanghai.nyu.edu/'>New York University Shanghai</a> · B.S. 2026 · CS & Math
+subtitle: <a href='https://www.ri.cmu.edu/'>CMU Robotics Institute</a> · MSR · previously <a href='https://shanghai.nyu.edu/'>NYU Shanghai</a>
 
 profile:
   align: right
@@ -11,7 +11,7 @@ profile:
   image_compare: prof_pic_color.png
   image_circular: false
   more_info: >
-    <p>NYU, New York City</p>
+    <p>Robotics Institute, Carnegie Mellon</p>
     <p>Contact: hh3043@nyu.edu</p>
 
 selected_papers: false
@@ -32,7 +32,7 @@ images:
   slider: true
 ---
 
-My name is 黄泓嘉 (Hongjia Huang), also known as Alex. I recently completed a B.S. in **Computer Science** and **Mathematics** at [New York University Shanghai](https://shanghai.nyu.edu/), graduating summa cum laude (GPA 3.93/4.0). I am broadly interested in building AI systems that are **physically grounded** — models that understand, simulate, and reason about the world as it actually works, from molecular dynamics to robot manipulation.
+My name is 黄泓嘉 (Hongjia Huang), also known as Alex. I am a master's student in the [MSR program](https://www.ri.cmu.edu/education/academic-programs/master-of-science-robotics/) at [Carnegie Mellon's Robotics Institute](https://www.ri.cmu.edu/). I completed my B.S. in **Computer Science** and **Mathematics** at [New York University Shanghai](https://shanghai.nyu.edu/), graduating summa cum laude (GPA 3.93/4.0). I am broadly interested in building AI systems that are **physically grounded** — models that understand, simulate, and reason about the world as it actually works, from molecular dynamics to robot manipulation.
 
 My research sits at the intersection of **robotics**, **computer vision**, and **physics-grounded video generation**. I am particularly drawn to questions about how physical constraints — ranging from atomic-scale interactions to macroscopic motion — can serve as inductive biases for learning representations that are stable, interpretable, and generalizable.
 
