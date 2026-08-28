@@ -6,8 +6,33 @@ div.container-link-button {
   margin-right: 0.5rem;
 }
 
+// The PDF download link lives inside the .post-title <h1>, which the site's
+// custom stylesheet scales up to 4.6rem; the icon would inherit that size.
+.post-header .post-title a.float-right {
+  display: inline-block;
+  font-size: 1rem;
+  line-height: 1;
+  margin-top: 0.7rem;
+  padding: 0.45rem 0.6rem;
+  color: var(--global-text-color);
+  border: 1px solid var(--global-divider-color);
+  border-radius: 3px;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+
+  &:hover {
+    color: var(--global-theme-color);
+    border-color: var(--global-theme-color);
+  }
+}
+
 table.table-cv {
   background-color: transparent !important;
+  // bootstrap's .table hardcodes color:#212529, which is the dark-mode card
+  // background; without this the map section is invisible in dark mode.
+  color: var(--global-text-color);
 
   td,
   th {
@@ -218,3 +243,111 @@ ul.timeline li::before {
      color: var(--global-text-color);
 }
 */
+
+/*****************************
+ * Site-specific CV fixes
+ *****************************/
+
+// The year column is col-md-2 (~70px of content box at desktop, ~48px at the
+// 768px breakpoint), but the badge carries an inline min-width:75px and the
+// location is nowrap, so both spill into the entry text.
+.cv .row > .col-md-2 {
+  padding-left: 0;
+  padding-right: 0.5rem;
+
+  .badge {
+    min-width: 0 !important;
+  }
+}
+
+.cv p.location {
+  white-space: normal;
+}
+
+// body sets font-feature-settings: "onum", which inherits into the badges and
+// drops the digits below the baseline of a line-height:1 box.
+.cv .card .list-group-item .badge {
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum", "tnum";
+  line-height: 1.25;
+}
+
+// ul.items is the only child of the entry column that does not carry the
+// ml-md-4 indent, so bullets hang further right than their own title.
+.cv ul.items {
+  padding-left: 1.1rem;
+  margin-left: 0.25rem;
+
+  @media (min-width: 768px) {
+    margin-left: 1.5rem;
+  }
+}
+
+.cv ul.subitems {
+  padding-left: 1.1rem;
+}
+
+.cv span.item-title {
+  font-weight: 600;
+}
+
+// the includes put font-weight-light (300) on the lists, which is the CV's
+// entire body copy — too thin for the serif, especially in dark mode.
+.cv .list-group-item {
+  font-weight: 400;
+}
+
+// A CV gets printed. Nothing else in _sass/ defines print styles, and the
+// col-sm-3/col-sm-9 split below only exists on pages with a toc sidebar.
+@media print {
+  @page {
+    size: auto;
+    margin: 15mm;
+  }
+
+  body,
+  .container {
+    min-width: 0 !important;
+    max-width: none !important;
+    padding-top: 0 !important;
+  }
+
+  #toc-sidebar,
+  progress,
+  .progress-container,
+  #back-to-top,
+  footer {
+    display: none !important;
+  }
+
+  .container > .row > .col-sm-3 {
+    display: none !important;
+  }
+
+  .container > .row > .col-sm-9 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  // browsers drop background-color when printing, and the badge's text colour
+  // is the card background — every year would print as an empty outline.
+  .cv .card .list-group-item .badge {
+    color: #000 !important;
+    background: transparent !important;
+    border: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  .cv .card {
+    border: 0 !important;
+    break-inside: avoid;
+  }
+
+  .cv .list-group-item {
+    break-inside: avoid;
+  }
+
+  a.btncv {
+    text-decoration: none !important;
+  }
+}

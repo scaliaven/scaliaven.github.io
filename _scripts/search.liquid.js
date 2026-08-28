@@ -52,6 +52,21 @@ ninja.data = [
       {%- endif -%}
     {%- endif -%}
   {%- endfor -%}
+  {%- assign cv_page = site.pages | where: 'layout', 'cv' | first -%}
+  {%- if cv_page -%}
+    {%- for entry in site.data.cv -%}
+      {
+        {%- assign entry_title = entry.title | escape | strip -%}
+        id: "cv-{{ entry_title | slugify }}",
+        title: "{{ entry_title | truncatewords: 13 }}",
+        description: "CV",
+        section: "CV",
+        handler: () => {
+          window.location.href = "{{ cv_page.url | relative_url }}#cv-{{ entry_title | slugify }}";
+        },
+      },
+    {%- endfor -%}
+  {%- endif -%}
   {%- for post in site.posts -%}
     {
       {%- assign title = post.title | escape | strip -%}

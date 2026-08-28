@@ -16,20 +16,21 @@ layout: default
             target="_blank"
             rel="noopener noreferrer"
             class="float-right"
+            aria-label="Download CV as PDF"
           >
             <i class="fa-solid fa-file-pdf"></i>
           </a>
         {% endif %}
       </h1>
       {% if page.description %}
-        <p class="post-description">{{ page.description }}</p>
+        <p class="post-description desc">{{ page.description }}</p>
       {% endif %}
     </header>
 
     <article>
       <div class="cv">
         {% for entry in site.data.cv %}
-          <a class="anchor" id="{{ entry.title }}"></a>
+          <a class="anchor" id="cv-{{ entry.title | slugify }}"></a>
           <div class="card mt-3 p-3">
             <h3 class="card-title font-weight-medium">{{ entry.title }}</h3>
             <div>
@@ -67,13 +68,14 @@ layout: default
             target="_blank"
             rel="noopener noreferrer"
             class="float-right"
+            aria-label="Download CV as PDF"
           >
             <i class="fa-solid fa-file-pdf"></i>
           </a>
         {% endif %}
       </h1>
       {% if page.description %}
-        <p class="post-description">{{ page.description }}</p>
+        <p class="post-description desc">{{ page.description }}</p>
       {% endif %}
     </header>
 
