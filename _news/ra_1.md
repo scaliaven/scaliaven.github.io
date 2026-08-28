@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-I become a Research assistant for Professor Shengjie Wang [@NYU Shanghai](https://dail.shanghai.nyu.edu/) 🎉🎉🎉
+I become a Research assistant for [Professor Shengjie Wang](https://sheng-jie-wang.github.io/) @NYU Shanghai 🎉🎉🎉

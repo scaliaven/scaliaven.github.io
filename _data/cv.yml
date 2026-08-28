@@ -4,7 +4,7 @@
     - name: Name
       value: 黄泓嘉&nbsp;/&nbsp;Hongjia (Alex) Huang
     - name: Affiliation
-      value: New York University Shanghai — B.S. Computer Science &amp; Mathematics, 2026
+      value: Robotics Institute, Carnegie Mellon University
     - name: Email
       value: hh3043@nyu.edu
     - name: Research Interests
@@ -19,6 +19,11 @@
 - title: Education
   type: time_table
   contents:
+    - title: M.S. in Robotics (MSR)
+      institution: Carnegie Mellon University
+      department: Robotics Institute
+      year: 2026–
+      location: Pittsburgh, US
     - title: B.S. in Computer Science and Mathematics (double major)
       institution: New York University Shanghai
       department: Summa Cum Laude
