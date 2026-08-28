@@ -32,7 +32,7 @@ images:
   slider: true
 ---
 
-My name is 黄泓嘉 (Hongjia Huang), also known as Alex. I am a junior at [New York University Shanghai](https://shanghai.nyu.edu/), double majoring in **Computer Science** and **Mathematics** (GPA 3.94/4.0). I am broadly interested in building AI systems that are **physically grounded** — models that understand, simulate, and reason about the world as it actually works, from molecular dynamics to robot manipulation.
+My name is 黄泓嘉 (Hongjia Huang), also known as Alex. I am a senior at [New York University Shanghai](https://shanghai.nyu.edu/), double majoring in **Computer Science** and **Mathematics** (GPA 3.94/4.0). I am broadly interested in building AI systems that are **physically grounded** — models that understand, simulate, and reason about the world as it actually works, from molecular dynamics to robot manipulation.
 
 My research sits at the intersection of **physics-informed machine learning**, **generative models**, **computer vision**, and **embodied AI**. I am particularly drawn to questions about how physical constraints — ranging from atomic-scale interactions to macroscopic motion — can serve as inductive biases for learning representations that are stable, interpretable, and generalizable.
 
