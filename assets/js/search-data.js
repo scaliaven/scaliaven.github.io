@@ -30,7 +30,56 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/repositories/";
           },
-        },{id: "post-cifar-10-classification-using-resnet",
+        },{id: "nav-cv",
+          title: "cv",
+          description: "Education, research experience, selected projects, and awards. Also available as a PDF.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "cv-general-information",
+        title: "General Information",
+        description: "CV",
+        section: "CV",
+        handler: () => {
+          window.location.href = "/cv/#cv-general-information";
+        },
+      },{id: "cv-education",
+        title: "Education",
+        description: "CV",
+        section: "CV",
+        handler: () => {
+          window.location.href = "/cv/#cv-education";
+        },
+      },{id: "cv-research-experience",
+        title: "Research Experience",
+        description: "CV",
+        section: "CV",
+        handler: () => {
+          window.location.href = "/cv/#cv-research-experience";
+        },
+      },{id: "cv-selected-projects",
+        title: "Selected Projects",
+        description: "CV",
+        section: "CV",
+        handler: () => {
+          window.location.href = "/cv/#cv-selected-projects";
+        },
+      },{id: "cv-honors-and-awards",
+        title: "Honors and Awards",
+        description: "CV",
+        section: "CV",
+        handler: () => {
+          window.location.href = "/cv/#cv-honors-and-awards";
+        },
+      },{id: "cv-technical-skills",
+        title: "Technical Skills",
+        description: "CV",
+        section: "CV",
+        handler: () => {
+          window.location.href = "/cv/#cv-technical-skills";
+        },
+      },{id: "post-cifar-10-classification-using-resnet",
       
         title: "CIFAR-10 Classification using ResNet",
       
