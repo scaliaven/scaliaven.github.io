@@ -264,6 +264,12 @@ ul.timeline li::before {
   white-space: normal;
 }
 
+// keep the General Information labels on one line; the value column has the
+// room to wrap instead.
+.cv table.table-cv td:first-child {
+  white-space: nowrap;
+}
+
 // body sets font-feature-settings: "onum", which inherits into the badges and
 // drops the digits below the baseline of a line-height:1 box.
 .cv .card .list-group-item .badge {

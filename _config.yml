@@ -602,4 +602,4 @@ third_party_libraries:
 #   - interests
 #   - references
 
-cv_pdf: cv_orcid.pdf
+cv_pdf: cv_cmu.pdf

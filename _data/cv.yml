@@ -4,11 +4,11 @@
     - name: Name
       value: 黄泓嘉&nbsp;/&nbsp;Hongjia (Alex) Huang
     - name: Affiliation
-      value: New York University Shanghai — Computer Science &amp; Mathematics
+      value: New York University Shanghai — B.S. Computer Science &amp; Mathematics, 2026
     - name: Email
       value: hh3043@nyu.edu
     - name: Research Interests
-      value: Physics-grounded world modeling, robotics, and computer vision
+      value: Robotics, computer vision, and physics-grounded video generation
     - name: Profiles
       links:
         - name: ORCID
@@ -19,41 +19,42 @@
 - title: Education
   type: time_table
   contents:
-    - title: Double major in Computer Science and Mathematics
+    - title: B.S. in Computer Science and Mathematics (double major)
       institution: New York University Shanghai
-      department: Class of 2026
+      department: Summa Cum Laude
       year: 2022–26
       location: Shanghai, China
       description:
-        - "Overall GPA: 3.94 / 4.0 — Computer Science 3.98 / 4.0, Mathematics 4.00 / 4.0"
+        - "Overall GPA: 3.93 / 4.0"
         - title: Selected coursework
           contents:
             - "Graduate: Natural Language Processing with Representation Learning, Inference &amp; Representation, Reinforcement Learning"
-            - "Computer Science: Machine Learning, Parallel Computing, Algorithms and Data Structures"
+            - "Computer Science: Machine Learning, Parallel Computing, Algorithms, Operating Systems, Data Structures"
             - "Mathematics (Honors): Ordinary Differential Equations, Analysis, Numerical Analysis, Linear Algebra"
-            - "Mathematics: Linear and Nonlinear Optimization, Probability &amp; Statistics"
+            - "Mathematics: Partial Differential Equations, Linear and Nonlinear Optimization, Probability &amp; Statistics"
 
 - title: Research Experience
   type: time_table
   contents:
+    - title: Auxiliary Streams for Video-Diffusion World-Action Models
+      institution: New York University Shanghai
+      department: Independent research · Advised by Prof. Shengjie Wang (NYU Shanghai) and Prof. Tianyi Zhou (UMD)
+      year: 2024–
+      location: Shanghai, China
+      description:
+        - Investigating whether training-time auxiliary structure can improve the policy of a frozen Wan2.2-5B video-diffusion world-action model, particularly its spatial out-of-distribution generalization.
+        - Added inference-free alignment teachers (VGGT, CoTracker, DINO/REPA) and co-denoised streams routed by a Mixture-of-LoRA-Experts, passing 3D structure from 2D video to the action head at test time.
+        - Earlier in the project, adapted pretrained video diffusion models with lightweight modifications so that generated video obeys physical laws, conditioning on physical constraints through a modified ControlNeXt and generating supervised training data with 3D physics engines (Genesis).
     - title: Physics-Informed Vision-Language-Action Models
       institution: University of Maryland, College Park
       department: Independent research · Advised by Prof. Furong Huang and Prof. Tianyi Zhou
       year: 2025–
       location: Maryland, US
       description:
-        - Integrating trajectory planning directly into the action-prediction objective of VLA models.
-        - Proposed a general method for fusing a 3D spatial encoder with a 2D vision encoder to aid action-prediction training via future latent alignment.
-        - Implemented a cascaded pipeline in which a predicted future trace conditions the downstream action predictor.
-    - title: Physics-Informed Video Diffusion Models
-      institution: New York University Shanghai
-      department: Independent research · Advised by Prof. Shengjie Wang (NYU Shanghai) and Prof. Tianyi Zhou (UMD)
-      year: 2024–
-      location: Shanghai, China
-      description:
-        - Adapting pretrained video diffusion models with lightweight modifications so that generated video obeys physical laws, while keeping training efficient and inference fast.
-        - Used 3D physics engines (Genesis) to generate supervised training data.
-        - Modified ControlNeXt to condition generation on physical constraints.
+        - Integrating trajectory planning into the action-prediction objective of VLA models such as GR00T N1.5.
+        - Using a 4D encoder that fuses multiple views across multiple timesteps to propagate spatial and temporal information jointly, aiding action prediction via future latent alignment.
+        - Designing an implicit 2D-to-3D mapping whose past-to-current 3D alignment, guided by the injected past 2D trace, aids action prediction.
+        - Implementing a cascaded pipeline in which a predicted future trace conditions the downstream action predictor.
     - title: Atomic Environment Imaging for Efficient Machine-Learning Force Fields
       institution: New York University Shanghai
       department: Independent research · Advised by Prof. Shengjie Wang
@@ -63,6 +64,15 @@
         - Using 3D visualizations of molecular structure to improve force-field prediction models.
         - Built a general pipeline that renders predefined multi-view images of the local environment centered on each atom.
         - Added image encoders for models with direct force prediction, and coordinate encoders that reconstruct those images for gradient-based models that take only coordinates as input.
+    - title: "TraceGen: World Modeling in 3D Trace-Space"
+      institution: University of Maryland, College Park
+      department: Summer research · Advised by Prof. Furong Huang
+      year: 2025
+      location: Maryland, US
+      description:
+        - Addressed the small-data problem in manipulation with a compact 3D trace-space of scene-level trajectories, letting a world model predict future motion geometrically rather than in pixel space and learn from cross-embodiment, cross-environment, and cross-task video.
+        - Contributed to TraceForge, the data pipeline that converts heterogeneous human and robot video into consistent 3D traces, yielding a 123K-video, 1.8M observation–trace–language triplet pretraining corpus.
+        - Pretraining on that corpus reaches 80% success across four tasks from five target-robot videos, at 50–600× the inference speed of video-based world models, and 67.5% real-robot success from five uncalibrated handheld human videos.
     - title: Efficient Training for Small-Molecule Force Fields
       institution: New York University Shanghai
       department: Independent research · Advised by Prof. Shengjie Wang (NYU Shanghai) and Prof. Tianyi Zhou (UMD)
@@ -88,7 +98,7 @@
           linkname: report
     - title: Popularity Prediction of YouTube Videos
       institution: New York University Shanghai
-      department: Summer research, advised by Prof. Xianbin Gu
+      department: Summer research · Advised by Prof. Xianbin Gu
       year: 2023
       location: Shanghai, China
       description:
@@ -98,6 +108,9 @@
 - title: Honors and Awards
   type: time_table
   contents:
+    - year: 2026
+      items:
+        - Summa Cum Laude, B.S., NYU Shanghai
     - year: 2023–25
       items:
         - Recognition Award, NYU Shanghai
@@ -122,6 +135,6 @@
         - CUDA, OpenMP, MPI
     - title: Domains
       items:
-        - Molecular dynamics and machine-learned force fields
-        - Diffusion and generative models
-        - Vision-language-action models and robot learning
+        - Robot learning and vision-language-action models
+        - Video diffusion and world models
+        - Machine-learned molecular force fields
