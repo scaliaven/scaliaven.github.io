@@ -49,6 +49,8 @@ jobs:
         with:
           fail: true
           # removed md files that include liquid tags
-          # 403/429 are publisher/CDN bot walls (Elsevier, Cloudflare), not broken links.
+          # 403/429 are publisher/CDN bot walls (Elsevier, Cloudflare) and 202 is figshare's
+          # DOI resolver -- none are broken links. --root-dir resolves root-relative asset
+          # paths like /assets/pdf/IMM.pdf against the checkout.
           # _pages/{publications,teaching,profiles,dropdown}.md are in _config.yml exclude: and never built.
-          args: --user-agent 'curl/7.54' --accept '200,206,403,429' --exclude-path README.md --exclude-path FAQ.md --exclude-path _pages/404.md --exclude-path _pages/blog.md --exclude-path _pages/publications.md --exclude-path _pages/teaching.md --exclude-path _pages/profiles.md --exclude-path _pages/dropdown.md --verbose --no-progress './**/*.md' './**/*.html' './_bibliography/*.bib' './_data/*.yml'
+          args: --user-agent 'curl/7.54' --accept '200,202,206,403,429' --root-dir . --exclude-path README.md --exclude-path FAQ.md --exclude-path INSTALL.md --exclude-path _pages/about_einstein.md --exclude-path _pages/404.md --exclude-path _pages/blog.md --exclude-path _pages/publications.md --exclude-path _pages/teaching.md --exclude-path _pages/profiles.md --exclude-path _pages/dropdown.md --verbose --no-progress './**/*.md' './**/*.html' './_bibliography/*.bib' './_data/*.yml'
