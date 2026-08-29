@@ -195,7 +195,6 @@ exclude:
   - purgecss.config.js
   - README.md
   - requirements.txt
-  - readme_preview/
   - vendor
   - _pages/teaching.md
   - _pages/dropdown.md
