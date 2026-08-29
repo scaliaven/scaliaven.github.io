@@ -67,7 +67,7 @@ npx prettier --write .
 - **Publications** are driven entirely by `_bibliography/papers.bib` via `jekyll/scholar`. Custom BibTeX fields like `abbr`, `selected`, `pdf`, `code`, `arxiv`, `preview` control how entries render.
 - **CV page** (`/cv/`) renders `_data/cv.yml` through `_layouts/cv.liquid`. Section `type:` values map to the partials in `_includes/cv/`. The PDF download button comes from `cv_pdf:` in the page front matter; `cv_pdf:` at site level in `_config.yml` drives the CV icon in `_includes/social.liquid`.
 - **Deployment** is handled by `.github/workflows/deploy.yml` — pushes to `main` build and push to the `gh-pages` branch automatically. Do not edit `gh-pages` directly. Its `paths:` filter deliberately excludes `broken-links.yml` and `prettier.yml`, so a commit touching only those does not redeploy.
-- **Distill is not installed.** `_layouts/distill.liquid`, `_includes/distill_scripts.liquid` and `assets/js/distillpub/` were removed; no content uses `layout: distill`. `_sass/_distill.scss` and the `.distill` rules in `_base.scss` are leftover dead CSS.
+- **Distill is not installed.** `_layouts/distill.liquid`, `_includes/distill_scripts.liquid`, `assets/js/distillpub/` and `_sass/_distill.scss` were all removed; no content uses `layout: distill`. Restoring it means bringing back the layout, the runtime and the stylesheet import in `assets/css/main.scss` together.
 
 ## Gotchas
 
