@@ -29,7 +29,7 @@ latest_posts:
 
 images:
   compare: true
-  slider: true
+  slider: false
 ---
 
 My name is 黄泓嘉 (Hongjia Huang), also known as Alex. I am a master's student in the [MSR program](https://www.ri.cmu.edu/education/academic-programs/master-of-science-robotics/) at [Carnegie Mellon's Robotics Institute](https://www.ri.cmu.edu/). I completed my B.S. in **Computer Science** and **Mathematics** at [New York University Shanghai](https://shanghai.nyu.edu/), graduating summa cum laude (GPA 3.93/4.0). I am broadly interested in building AI systems that are **physically grounded** — models that understand, simulate, and reason about the world as it actually works, from molecular dynamics to robot manipulation.
