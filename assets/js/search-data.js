@@ -141,7 +141,14 @@ ninja.data = [{
         title: 'email',
         section: 'Socials',
         handler: () => {
-          window.open("mailto:%68%68%33%30%34%33@%6E%79%75.%65%64%75", "_blank");
+          window.open("mailto:%68%6F%6E%67%6A%69%61%68@%61%6E%64%72%65%77.%63%6D%75.%65%64%75", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0007-7627-0102", "_blank");
         },
       },{
         id: 'social-github',
@@ -156,6 +163,13 @@ ninja.data = [{
         section: 'Socials',
         handler: () => {
           window.open("https://www.linkedin.com/in/hongjia-alex-huang-166165262", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
         },
       },{
       id: 'light-theme',
