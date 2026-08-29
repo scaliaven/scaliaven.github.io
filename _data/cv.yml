@@ -7,6 +7,8 @@
       value: Robotics Institute, Carnegie Mellon University
     - name: Email
       value: hongjiah@andrew.cmu.edu
+    - name: Secondary email
+      value: hh3043@nyu.edu
     - name: Research Interests
       value: Robotics, computer vision, and physics-grounded video generation
     - name: Profiles

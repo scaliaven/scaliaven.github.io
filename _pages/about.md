@@ -13,6 +13,7 @@ profile:
   more_info: >
     <p>Robotics Institute, Carnegie Mellon</p>
     <p>Contact: hongjiah@andrew.cmu.edu</p>
+    <p>Secondary: hh3043@nyu.edu</p>
 
 selected_papers: false
 social: true
