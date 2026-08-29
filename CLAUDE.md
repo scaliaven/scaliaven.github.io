@@ -102,6 +102,22 @@ It checks `.md`, `.html`, `_bibliography/*.bib` and `_data/*.yml`. `--accept` to
 
 Note that lychee fails the build on **timeouts** as well as errors, and a run can report `0 Errors` and still exit non-zero. `.lycheeignore` holds hosts that are healthy in a browser but unreachable from GitHub runners — `www.umiacs.umd.edu` (times out through all retries) and `linkedin.com` (HTTP 999 to non-browser clients). Those two links are not covered by CI and need checking by hand.
 
+The check reaches ~119 unique external URLs, so it is **mildly flaky**: a single transient error or timeout has been observed and then vanished on an immediate re-run. Re-run once before treating a failure as real, and read the log rather than assuming a link rotted — two failures in this repo's history were the action failing to install lychee at all, with no link ever checked.
+
+## Known unfixed
+
+Deliberately open, with the reasoning, so nobody re-derives it:
+
+**jQuery 3.6.0 + MDBootstrap 4.20.0.** MDB4 is at its final release and reports no advisories today, so there is nothing to bump — but it is an end-of-life jQuery-era line that will never receive a security fix. There is no in-place remedy; only the v1.x migration retires it. This is the single finding from the upstream audit with no local workaround.
+
+**The v1.x migration itself** — 18–34 hours, deferred in favour of backporting. See **Upstream** below for what makes it expensive. Revisit if the site is being redesigned anyway, or if RenderCV's PDF pipeline becomes attractive (today `_data/cv.yml` and `assets/pdf/cv_cmu.pdf` are maintained separately by hand).
+
+**Two links CI cannot verify** — the LinkedIn profile and `www.umiacs.umd.edu`, both in `.lycheeignore` for the reasons above. Nothing will flag them if they break; check them by hand occasionally.
+
+**Five library keys are safe but inert** — `plotly`, `lightbox2`, `spotlight`, `venobox`, `photoswipe`. Their branches are guarded, so enabling the front matter is a silent no-op rather than a broken request, but the feature does not work until a `third_party_libraries` entry with a correct `integrity` hash is added.
+
+**`assets/json/resume.json`** is unused — the CV renders from `_data/cv.yml`, and `jekyll_get_json` is commented out in `_config.yml`. Kept only as a starting point if the JSON Resume path is ever wanted.
+
 ## Upstream
 
 al-folio moved to a **gem architecture** at v1.0, and renamed its default branch `master` → `main`. `_layouts/`, `_includes/`, `_sass/` and `assets/js/` no longer exist upstream — they live in `al_folio_core` and ~15 sibling gems. This fork is a pre-v1.0 monolith and shares no git history with upstream.

@@ -70,7 +70,7 @@ Note that `deploy.yml`'s `paths:` filter deliberately skips `broken-links.yml` a
 
 ## Notes for contributors and agents
 
-`CLAUDE.md` documents this repo's silent-failure modes — social keys that moved to `_data/socials.yml`, the two independent `<head>` metadata flags, SRI hashes that must match the bytes a CDN serves, and library keys that templates read but `_config.yml` does not define. Read it before changing configuration or templates.
+`CLAUDE.md` documents this repo's silent-failure modes — social keys that moved to `_data/socials.yml`, the two independent `<head>` metadata flags, SRI hashes that must match the bytes a CDN serves, and library keys that templates read but `_config.yml` does not define. It also carries a **Known unfixed** section listing what is deliberately still open and why. Read it before changing configuration or templates.
 
 ## Credits
 
