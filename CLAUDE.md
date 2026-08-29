@@ -89,6 +89,8 @@ curl -sL "<url>" | openssl dgst -sha256 -binary | openssl base64 -A
 
 **`assets/img/` is processed by imagemagick** (`.jpg .jpeg .png .tiff .gif` → WebP at 480/800/1400). Don't put small fixed-size assets there; that is why `apple-touch-icon.png` sits at the repo root.
 
+**`title: blank` in `_config.yml` is a sentinel, not an empty value.** `header.liquid`, `about.liquid`, `metadata.liquid` and `citation.liquid` all branch on `site.title == 'blank'` and compose the name from `first_name`/`middle_name`/`last_name` — that is what renders the masthead with a bold first name. Do not set a real `title:` to fix something downstream; four templates change behaviour. `jekyll-feed` did not know the convention and titled the feed "blank", which is why `feed.xml` at the repo root is a **local copy of the gem's template** (jekyll-feed skips its generator when that file exists). It carries two blocks marked `LOCAL`; re-diff it against the gem's `feed.xml` after any jekyll-feed upgrade. The autodiscovery `<link>` in `head.liquid` is hand-written for the same reason — `{% feed_meta %}` reads `site.title` directly.
+
 **`.bib` `doi` fields take a bare DOI.** `bib.liquid` prefixes `https://doi.org/` itself, so `doi = {https://doi.org/10.x/y}` renders a doubled URL.
 
 **Link checker.** `.github/workflows/broken-links.yml` pins both the action (`@v2.9.0`) and the binary (`lycheeVersion: v0.24.2`), and they must stay compatible — action ≤ v2.1.0 cannot install lychee ≥ 0.18, whose tarball nests the binary in a subdirectory. Before changing its `args:`, reproduce locally:
