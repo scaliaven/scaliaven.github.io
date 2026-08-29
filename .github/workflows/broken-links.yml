@@ -48,6 +48,9 @@ jobs:
         uses: lycheeverse/lychee-action@v2.1.0
         with:
           fail: true
+          # The action defaults to lychee v0.17.0, which predates --root-dir.
+          # Pinned to the version this arg set was verified against.
+          lycheeVersion: v0.24.2
           # removed md files that include liquid tags
           # 403/429 are publisher/CDN bot walls (Elsevier, Cloudflare) and 202 is figshare's
           # DOI resolver -- none are broken links. --root-dir resolves root-relative asset
