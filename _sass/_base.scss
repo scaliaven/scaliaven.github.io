@@ -898,12 +898,30 @@ code {
 }
 
 // Transitioning Themes
-html.transition,
+//
+// `color`, `fill` and `stroke` are inherited, so transitioning them on every
+// element makes each one ease toward a parent that is itself mid-animation --
+// the convergence compounds with nesting depth and then snaps. Transition them
+// once at the root and let inheritance carry the change.
+//
+// The duration must stay below the 500ms class removal in assets/js/theme.js,
+// or every switch is truncated mid-animation. (`transition-delay: 0` was also
+// invalid -- a <time> needs a unit -- and the shorthand already resets it.)
+html.transition {
+  transition:
+    color 300ms ease,
+    fill 300ms ease,
+    stroke 300ms ease,
+    background-color 300ms ease !important;
+}
+
 html.transition *,
 html.transition *:before,
 html.transition *:after {
-  transition: all 750ms !important;
-  transition-delay: 0 !important;
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease !important;
 }
 
 // Extra Markdown style (post Customization)
