@@ -83,9 +83,9 @@ These have each caused a real, silent bug in this repo.
 curl -sL "<url>" | openssl dgst -sha256 -binary | openssl base64 -A
 ```
 
-**Six library keys are read by templates but have no `third_party_libraries` entry**: `plotly`, `lightbox2`, `spotlight`, `venobox`, `photoswipe`, `photoswipe-lightbox`. Setting the matching front matter (`page.chart.plotly`, `page.images.lightbox2`, …) emits `<script src="">` — a request to the page itself — with no build error. Add the config entry first.
+**Five library keys are read by templates but have no `third_party_libraries` entry**: `plotly`, `lightbox2`, `spotlight`, `venobox`, `photoswipe`. Their branches in `head.liquid` and `scripts.liquid` now also require `site.third_party_libraries.<name>`, so enabling the front matter without adding the library is a silent no-op instead of emitting `<script src="">`. To actually use one, add the config entry — including a correct `integrity` hash — first.
 
-**Pinned libraries with known CVEs that no page currently loads**: mermaid 10.7.0 (8 advisories, one high), vega 5.27.0, echarts 5.5.0. Bump them before enabling `page.mermaid`, `page.chart.vega_lite` or `page.chart.echarts`.
+**Chart libraries are pinned ahead of their CVEs** (mermaid 10.9.8, vega 6.4.0, vega-lite 6.4.3, vega-embed 7.1.0, echarts 6.1.0 — all 0 advisories on OSV). No page loads them, so they are easy to forget; re-check OSV before enabling `page.mermaid`, `page.chart.vega_lite` or `page.chart.echarts`, and note that vega and echarts had to cross a major version to get patched, so a future bump may again be breaking.
 
 **`assets/img/` is processed by imagemagick** (`.jpg .jpeg .png .tiff .gif` → WebP at 480/800/1400). Don't put small fixed-size assets there; that is why `apple-touch-icon.png` sits at the repo root.
 
@@ -99,6 +99,8 @@ brew install lychee
 ```
 
 It checks `.md`, `.html`, `_bibliography/*.bib` and `_data/*.yml`. `--accept` tolerates publisher/CDN bot walls (403/429) and figshare's 202; `--root-dir .` resolves root-relative asset paths.
+
+Note that lychee fails the build on **timeouts** as well as errors, and a run can report `0 Errors` and still exit non-zero. `.lycheeignore` holds hosts that are healthy in a browser but unreachable from GitHub runners — `www.umiacs.umd.edu` (times out through all retries) and `linkedin.com` (HTTP 999 to non-browser clients). Those two links are not covered by CI and need checking by hand.
 
 ## Upstream
 
