@@ -74,6 +74,14 @@
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url | bust_css_cache }}">
 <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
 
+<!--
+  RSS/Atom autodiscovery. Written by hand rather than with jekyll-feed's
+  {% feed_meta %}, which reads site.title and would advertise the feed as
+  "blank" -- al-folio's sentinel for "compose the name". See feed.xml.
+-->
+{% capture feed_title %}{{ site.first_name }}{% if site.middle_name %} {{ site.middle_name }}{% endif %} {{ site.last_name }}{% endcapture %}
+<link rel="alternate" type="application/atom+xml" title="{{ feed_title | strip }}" href="{{ '/feed.xml' | absolute_url }}">
+
 <!-- Dark Mode -->
 <script src="{{ '/assets/js/theme.js' | relative_url | bust_file_cache }}"></script>
 {% if site.enable_darkmode %}
