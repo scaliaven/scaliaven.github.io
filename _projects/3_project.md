@@ -14,4 +14,4 @@ This is the final project for the graduate level course Natural Language Process
 
 ### [Repo](https://github.com/scaliaven/NLP_project)
 
-### [Huggingface](https://huggingface.co/datasets/scaliaven/Ustop50k)
+### [Huggingface](https://huggingface.co/datasets/scaliaven/uspto-50k)
