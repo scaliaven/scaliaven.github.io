@@ -1,2 +1,6 @@
 linkedin.com
 reddit.com
+# Reachable and healthy (HTTP 200 in ~4s from a normal network) but times out
+# from GitHub runners even across lychee's 3 retries -- almost certainly
+# datacenter-IP filtering. Verify this one by hand.
+www.umiacs.umd.edu
