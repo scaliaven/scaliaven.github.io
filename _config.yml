@@ -46,8 +46,6 @@ repo_trophies:
 # will use title and url fields
 # Take a look to https://github.com/jekyll/jekyll-feed for more customization
 
-rss_icon: true
-
 # -----------------------------------------------------------------------------
 # Layout
 # -----------------------------------------------------------------------------
@@ -120,7 +118,7 @@ giscus:
   lang: en
 
 # Disqus comments (DEPRECATED)
-disqus_shortname: al-folio # put your disqus shortname
+# disqus_shortname: # put your disqus shortname (enables comments on posts that set disqus_comments: true)
 # https://help.disqus.com/en/articles/1717111-what-s-a-shortname
 
 # External sources.
