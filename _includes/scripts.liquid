@@ -98,7 +98,7 @@
   <script defer src="{{ '/assets/js/echarts-setup.js' | relative_url | bust_file_cache }}" type="text/javascript"></script>
 {% endif %}
 
-{% if page.chart and page.chart.plotly %}
+{% if page.chart and page.chart.plotly and site.third_party_libraries.plotly %}
   <!-- Plotly -->
   <script
     defer
@@ -260,7 +260,7 @@
 
 {% if page.images %}
   <!-- Image Layouts -->
-  {% if page.images.lightbox2 %}
+  {% if page.images.lightbox2 and site.third_party_libraries.lightbox2 %}
     <script
       defer
       src="{{ site.third_party_libraries.lightbox2.url.js }}"
@@ -268,7 +268,7 @@
       crossorigin="anonymous"
     ></script>
   {% endif %}
-  {% if page.images.photoswipe %}
+  {% if page.images.photoswipe and site.third_party_libraries.photoswipe %}
     <script defer src="{{ '/assets/js/photoswipe-setup.js' | relative_url }}" type="module"></script>
   {% endif %}
   {% if page.images.slider %}
@@ -279,14 +279,14 @@
       crossorigin="anonymous"
     ></script>
   {% endif %}
-  {% if page.images.spotlight %}
+  {% if page.images.spotlight and site.third_party_libraries.spotlight %}
     <script
       defer
       src="{{ site.third_party_libraries.spotlight.url.js }}"
       crossorigin="anonymous"
     ></script>
   {% endif %}
-  {% if page.images.venobox %}
+  {% if page.images.venobox and site.third_party_libraries.venobox %}
     <script
       defer
       src="{{ site.third_party_libraries.venobox.url.js }}"

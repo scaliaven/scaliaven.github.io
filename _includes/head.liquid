@@ -145,7 +145,7 @@
       crossorigin="anonymous"
     ></script>
   {% endif %}
-  {% if page.images.lightbox2 %}
+  {% if page.images.lightbox2 and site.third_party_libraries.lightbox2 %}
     <!-- Lightbox2 -->
     <link
       defer
@@ -155,7 +155,7 @@
       crossorigin="anonymous"
     >
   {% endif %}
-  {% if page.images.photoswipe %}
+  {% if page.images.photoswipe and site.third_party_libraries.photoswipe %}
     <!-- Photoswipe -->
     <link
       defer
@@ -174,7 +174,7 @@
       crossorigin="anonymous"
     >
   {% endif %}
-  {% if page.images.spotlight %}
+  {% if page.images.spotlight and site.third_party_libraries.spotlight %}
     <!-- Spotlight -->
     <link
       defer
@@ -184,7 +184,7 @@
       crossorigin="anonymous"
     >
   {% endif %}
-  {% if page.images.venobox %}
+  {% if page.images.venobox and site.third_party_libraries.venobox %}
     <!-- Venobox -->
     <link
       defer
