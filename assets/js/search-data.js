@@ -18,7 +18,7 @@ ninja.data = [{
           },
         },{id: "nav-projects",
           title: "projects",
-          description: "Coursework and Research Projects",
+          description: "Coursework and research projects",
           section: "Navigation",
           handler: () => {
             window.location.href = "/projects/";
@@ -121,19 +121,22 @@ ninja.data = [{
           section: "News",},{id: "news-i-started-the-msr-program-at-the-cmu-robotics-institute",
           title: 'I started the MSR program at the CMU Robotics Institute 🎉🎉🎉',
           description: "",
-          section: "News",},{id: "projects-video-recognition",
-          title: 'Video Recognition',
-          description: "Summer Research Project on Video Popularity Prediction",
+          section: "News",},{id: "news-i-joined-the-robotic-caregiving-and-human-interaction-rchi-lab-at-the-cmu-robotics-institute-working-with-professor-zackory-erickson",
+          title: 'I joined the Robotic Caregiving and Human Interaction (RCHI) Lab at the CMU...',
+          description: "",
+          section: "News",},{id: "projects-youtube-view-forecasting",
+          title: 'YouTube View Forecasting',
+          description: "Predicting 30-day view counts from what happens on screen, cutting error 26.5% below a views-only baseline",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
-            },},{id: "projects-audio-classification",
-          title: 'Audio Classification',
-          description: "Machine Learning Final Project",
+            },},{id: "projects-music-classification-from-spectrograms",
+          title: 'Music Classification from Spectrograms',
+          description: "Treating vocal spectrograms as greyscale images: an ensemble that reached 83.04% test accuracy",
           section: "Projects",handler: () => {
               window.location.href = "/projects/2_project/";
-            },},{id: "projects-chemical-reaction-prediction",
-          title: 'Chemical Reaction Prediction',
-          description: "Course Project on Natural Language Processing",
+            },},{id: "projects-cost-aware-finetuning-for-retrosynthesis",
+          title: 'Cost-aware Finetuning for Retrosynthesis',
+          description: "Cutting both the data cost and the compute cost of predicting reactants from products",
           section: "Projects",handler: () => {
               window.location.href = "/projects/3_project/";
             },},{
