@@ -112,14 +112,8 @@ ninja.data = [{
           window.location.href = "/blog/2025/introduction/";
         
       },
-    },{id: "news-i-become-a-research-assistant-for-professor-shengjie-wang-nyu-shanghai",
-          title: 'I become a Research assistant for Professor Shengjie Wang @NYU Shanghai 🎉🎉🎉',
-          description: "",
-          section: "News",},{id: "news-i-started-to-work-as-a-research-intern-umd-for-summer-2025-under-the-supervision-of-professor-tianyi-zhou-and-professor-furong-huang",
-          title: 'I started to work as a Research Intern @UMD for summer 2025, under...',
-          description: "",
-          section: "News",},{id: "news-i-started-the-msr-program-at-the-cmu-robotics-institute",
-          title: 'I started the MSR program at the CMU Robotics Institute 🎉🎉🎉',
+    },{id: "news-i-graduated-from-new-york-university-shanghai-with-a-b-s-in-computer-science-and-mathematics-summa-cum-laude",
+          title: 'I graduated from New York University Shanghai with a B.S. in Computer Science...',
           description: "",
           section: "News",},{id: "news-i-joined-the-robotic-caregiving-and-human-interaction-rchi-lab-at-the-cmu-robotics-institute-working-with-professor-zackory-erickson",
           title: 'I joined the Robotic Caregiving and Human Interaction (RCHI) Lab at the CMU...',
