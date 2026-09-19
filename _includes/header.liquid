@@ -1,6 +1,19 @@
 <header>
   <!-- Nav Bar -->
   <nav id="navbar" class="navbar navbar-light navbar-expand-sm {% if site.navbar_fixed %}fixed-top{% else %}sticky-top{% endif %}" role="navigation">
+    <div class="newspaper-nameplate" aria-hidden="true">
+      <span class="newspaper-edition">Research · Robotics · Intelligence</span>
+      <a class="newspaper-title" href="{{ '/' | relative_url }}">
+        {% if site.title == 'blank' %}
+          {{ site.first_name -}}
+          {%- if site.middle_name %} {{ site.middle_name }}{% endif %}
+          {{ site.last_name }}
+        {% else %}
+          {{ site.title }}
+        {% endif %}
+      </a>
+      <span class="newspaper-date" data-newspaper-date>Independent scholar edition</span>
+    </div>
     <div class="container">
       {% if page.permalink != '/' %}
         <a class="navbar-brand title font-weight-lighter" href="{{ site.baseurl }}/">
@@ -135,6 +148,13 @@
               </button>
             </li>
           {% endif %}
+          <!-- Toggle the optional newspaper layout independently of color theme. -->
+          <li class="toggle-container layout-toggle-container">
+            <button id="layout-toggle" type="button" title="Use newspaper layout" aria-label="Use newspaper layout" aria-pressed="false">
+              <i class="ti ti-news" aria-hidden="true"></i>
+              <span class="layout-toggle-label">paper</span>
+            </button>
+          </li>
           {% if site.enable_darkmode %}
             <!-- Toogle theme mode -->
             <li class="toggle-container">
