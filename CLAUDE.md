@@ -56,6 +56,7 @@ npx prettier --write .
 | `_bibliography/papers.bib` | Publications (rendered by jekyll-scholar)                                            |
 | `_data/cv.yml`             | CV content, rendered as the HTML CV page at `/cv/`                                   |
 | `_data/socials.yml`        | Social links, contact email, `rss_icon` — **not** `_config.yml`                      |
+| `_data/holidays.yml`       | Seasonal themes, applied client-side by date; preview with `?holiday=<name>`         |
 | `assets/json/resume.json`  | JSON Resume format CV (unused — `jekyll_get_json` is commented out in `_config.yml`) |
 | `assets/img/`              | Images (auto-converted to WebP at multiple widths by imagemagick)                    |
 | `apple-touch-icon.png`     | iOS home-screen icon; at repo root deliberately (see gotchas)                        |

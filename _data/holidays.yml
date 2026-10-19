@@ -1,0 +1,72 @@
+# Seasonal themes. assets/js/holiday.js checks the visitor's local date against
+# this list on every page load and applies the first entry whose window contains
+# today. Outside every window the site looks exactly as it normally does.
+#
+# Preview any entry on any date with ?holiday=<name> (e.g. /?holiday=halloween);
+# it sticks for the browser tab. ?holiday=off turns seasonal themes off for the
+# tab, and ?holiday=auto goes back to following the date.
+#
+# Fields (only name, start, end are required):
+#   start, end     "MM-DD" repeats every year; "YYYY-MM-DD" applies once.
+#                  Quote them, or YAML reads full dates as Date objects.
+#                  A window may wrap the new year ("12-30" to "01-02").
+#   mode           dark | light. Forces the base palette while the holiday runs.
+#   background     page background
+#   card           card/panel background (default: derived from background)
+#   text           body text
+#   muted          secondary text (default: derived from text)
+#   accent         links, highlights, the bold first name
+#   heading_font   any Google Fonts family, used for the name and headings
+#   pattern        cobweb | stars | snowflakes | hearts | none
+#   effect         bats | leaves | snow | petals | sparkles | none
+#   mark           emoji shown next to your name
+#   favicon        emoji for the browser tab
+#   greeting       one line shown in a dismissible strip under the navbar
+
+- name: halloween
+  start: "10-24"
+  end: "10-31"
+  mode: dark
+  background: "#17111d"
+  card: "#21182a"
+  text: "#efe6da"
+  muted: "#b4a79b"
+  accent: "#ff8a1f"
+  heading_font: "Creepster"
+  pattern: cobweb
+  effect: bats
+  mark: "🎃"
+  favicon: "🎃"
+  greeting: "Happy Halloween"
+
+- name: winter
+  start: "12-18"
+  end: "12-29"
+  mode: dark
+  background: "#10241d"
+  card: "#163029"
+  text: "#f2ecdf"
+  muted: "#b7c2b4"
+  accent: "#f07167"
+  heading_font: "Mountains of Christmas"
+  pattern: snowflakes
+  effect: snow
+  mark: "❄️"
+  favicon: "❄️"
+  greeting: "Happy holidays"
+
+- name: new-year
+  start: "12-30"
+  end: "01-02"
+  mode: dark
+  background: "#0b1430"
+  card: "#121d40"
+  text: "#eef0f7"
+  muted: "#a9b0c8"
+  accent: "#e8c36a"
+  heading_font: "Cinzel Decorative"
+  pattern: stars
+  effect: sparkles
+  mark: "✨"
+  favicon: "🥂"
+  greeting: "Happy New Year"

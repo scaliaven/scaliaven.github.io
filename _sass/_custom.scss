@@ -166,6 +166,11 @@ body {
       }
     }
 
+    .post-title-word {
+      display: inline-block;
+      white-space: nowrap;
+    }
+
     // Letterpress reveal: each letter starts pressed-down then lifts
     .post-title-char {
       display: inline-block;

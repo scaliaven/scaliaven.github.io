@@ -88,6 +88,14 @@
 {% capture feed_title %}{{ site.first_name }}{% if site.middle_name %} {{ site.middle_name }}{% endif %} {{ site.last_name }}{% endcapture %}
 <link rel="alternate" type="application/atom+xml" title="{{ feed_title | strip }}" href="{{ '/feed.xml' | absolute_url }}">
 
+{% if site.data.holidays %}
+  <!-- Seasonal theme from _data/holidays.yml. Must run before initTheme(), which reads data-holiday-mode. -->
+  <script src="{{ '/assets/js/holiday.js' | relative_url | bust_file_cache }}"></script>
+  <script>
+    initHoliday({{ site.data.holidays | jsonify }});
+  </script>
+{% endif %}
+
 <!-- Dark Mode -->
 <script src="{{ '/assets/js/theme.js' | relative_url | bust_file_cache }}"></script>
 {% if site.enable_darkmode %}

@@ -1,0 +1,259 @@
+/*******************************************************************************
+ * Seasonal themes — see _data/holidays.yml and assets/js/holiday.js.
+ *
+ * The palette arrives as inline custom properties on <html>, so this file only
+ * covers what colours cannot: the heading font, background patterns, the
+ * drifting effects and the greeting strip.
+ ******************************************************************************/
+
+// Pattern shapes are masks, painted in the current text colour, so one shape
+// works on any palette.
+$holiday-web-left: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cg fill='none' stroke='%23000' stroke-width='1.3'%3E%3Cpath d='M0 0L300.0 0.0M0 0L289.8 77.6M0 0L259.8 150.0M0 0L212.1 212.1M0 0L150.0 259.8M0 0L77.6 289.8M0 0L0.0 300.0M36.0 0.0Q30.7 4.0 34.8 9.3Q28.6 11.8 31.2 18.0Q24.6 18.8 25.5 25.5Q18.8 24.6 18.0 31.2Q11.8 28.6 9.3 34.8Q4.0 30.7 0.0 36.0M70.0 0.0Q59.7 7.9 67.6 18.1Q55.6 23.0 60.6 35.0Q47.8 36.6 49.5 49.5Q36.6 47.8 35.0 60.6Q23.0 55.6 18.1 67.6Q7.9 59.7 0.0 70.0M104.0 0.0Q88.7 11.7 100.5 26.9Q82.6 34.2 90.1 52.0Q71.0 54.4 73.5 73.5Q54.4 71.0 52.0 90.1Q34.2 82.6 26.9 100.5Q11.7 88.7 0.0 104.0M138.0 0.0Q117.7 15.5 133.3 35.7Q109.6 45.4 119.5 69.0Q94.2 72.2 97.6 97.6Q72.2 94.2 69.0 119.5Q45.4 109.6 35.7 133.3Q15.5 117.7 0.0 138.0M172.0 0.0Q146.7 19.3 166.1 44.5Q136.7 56.6 149.0 86.0Q117.4 90.0 121.6 121.6Q90.0 117.4 86.0 149.0Q56.6 136.7 44.5 166.1Q19.3 146.7 0.0 172.0M206.0 0.0Q175.6 23.1 199.0 53.3Q163.7 67.8 178.4 103.0Q140.6 107.8 145.7 145.7Q107.8 140.6 103.0 178.4Q67.8 163.7 53.3 199.0Q23.1 175.6 0.0 206.0M240.0 0.0Q204.6 26.9 231.8 62.1Q190.7 79.0 207.8 120.0Q163.7 125.6 169.7 169.7Q125.6 163.7 120.0 207.8Q79.0 190.7 62.1 231.8Q26.9 204.6 0.0 240.0M274.0 0.0Q233.6 30.8 264.7 70.9Q217.7 90.2 237.3 137.0Q186.9 143.4 193.7 193.7Q143.4 186.9 137.0 237.3Q90.2 217.7 70.9 264.7Q30.8 233.6 0.0 274.0'/%3E%3C/g%3E%3C/svg%3E");
+$holiday-web-right: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cg fill='none' stroke='%23000' stroke-width='1.3' transform='translate(300 0) scale(-1 1)'%3E%3Cpath d='M0 0L300.0 0.0M0 0L289.8 77.6M0 0L259.8 150.0M0 0L212.1 212.1M0 0L150.0 259.8M0 0L77.6 289.8M0 0L0.0 300.0M36.0 0.0Q30.7 4.0 34.8 9.3Q28.6 11.8 31.2 18.0Q24.6 18.8 25.5 25.5Q18.8 24.6 18.0 31.2Q11.8 28.6 9.3 34.8Q4.0 30.7 0.0 36.0M70.0 0.0Q59.7 7.9 67.6 18.1Q55.6 23.0 60.6 35.0Q47.8 36.6 49.5 49.5Q36.6 47.8 35.0 60.6Q23.0 55.6 18.1 67.6Q7.9 59.7 0.0 70.0M104.0 0.0Q88.7 11.7 100.5 26.9Q82.6 34.2 90.1 52.0Q71.0 54.4 73.5 73.5Q54.4 71.0 52.0 90.1Q34.2 82.6 26.9 100.5Q11.7 88.7 0.0 104.0M138.0 0.0Q117.7 15.5 133.3 35.7Q109.6 45.4 119.5 69.0Q94.2 72.2 97.6 97.6Q72.2 94.2 69.0 119.5Q45.4 109.6 35.7 133.3Q15.5 117.7 0.0 138.0M172.0 0.0Q146.7 19.3 166.1 44.5Q136.7 56.6 149.0 86.0Q117.4 90.0 121.6 121.6Q90.0 117.4 86.0 149.0Q56.6 136.7 44.5 166.1Q19.3 146.7 0.0 172.0M206.0 0.0Q175.6 23.1 199.0 53.3Q163.7 67.8 178.4 103.0Q140.6 107.8 145.7 145.7Q107.8 140.6 103.0 178.4Q67.8 163.7 53.3 199.0Q23.1 175.6 0.0 206.0M240.0 0.0Q204.6 26.9 231.8 62.1Q190.7 79.0 207.8 120.0Q163.7 125.6 169.7 169.7Q125.6 163.7 120.0 207.8Q79.0 190.7 62.1 231.8Q26.9 204.6 0.0 240.0M274.0 0.0Q233.6 30.8 264.7 70.9Q217.7 90.2 237.3 137.0Q186.9 143.4 193.7 193.7Q143.4 186.9 137.0 237.3Q90.2 217.7 70.9 264.7Q30.8 233.6 0.0 274.0'/%3E%3C/g%3E%3C/svg%3E");
+$holiday-stars: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Ccircle cx='53' cy='27' r='0.8'/%3E%3Ccircle cx='15' cy='85' r='1.3'/%3E%3Ccircle cx='93' cy='142' r='1'/%3E%3Ccircle cx='10' cy='70' r='0.8'/%3E%3Ccircle cx='41' cy='88' r='0.8'/%3E%3Ccircle cx='130' cy='23' r='1'/%3E%3Ccircle cx='100' cy='93' r='0.8'/%3E%3Ccircle cx='92' cy='64' r='1'/%3E%3Ccircle cx='11' cy='134' r='1.3'/%3E%3Ccircle cx='68' cy='86' r='1.3'/%3E%3Ccircle cx='89' cy='108' r='0.8'/%3E%3Ccircle cx='92' cy='101' r='1.3'/%3E%3Ccircle cx='19' cy='112' r='0.8'/%3E%3Ccircle cx='98' cy='79' r='1.8'/%3E%3C/svg%3E");
+$holiday-snowflakes: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cg stroke='%23000' stroke-width='1.4' stroke-linecap='round'%3E%3Cpath d='M18 28h12M24 22v12M19.8 23.8l8.4 8.4M19.8 32.2l8.4-8.4'/%3E%3Cpath d='M80 64h12M86 58v12M81.8 59.8l8.4 8.4M81.8 68.2l8.4-8.4'/%3E%3Cpath d='M34 98h12M40 92v12M35.8 93.8l8.4 8.4M35.8 102.2l8.4-8.4'/%3E%3C/g%3E%3C/svg%3E");
+$holiday-hearts: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpath transform='translate(20 24) scale(1)' d='M0 3C0-1 5-2 6 1.5 7-2 12-1 12 3c0 4-6 7.5-6 7.5S0 7 0 3z'/%3E%3Cpath transform='translate(78 58) scale(0.8)' d='M0 3C0-1 5-2 6 1.5 7-2 12-1 12 3c0 4-6 7.5-6 7.5S0 7 0 3z'/%3E%3Cpath transform='translate(36 92) scale(0.7)' d='M0 3C0-1 5-2 6 1.5 7-2 12-1 12 3c0 4-6 7.5-6 7.5S0 7 0 3z'/%3E%3C/svg%3E");
+
+// ── Heading font ───────────────────────────────────────────────────────────────
+
+html[data-holiday-font] {
+  // The newspaper layout caps the title at 18ch, which a wide display face
+  // overflows mid-word.
+  .post-header .post-title {
+    max-width: none;
+  }
+
+  .post-header .post-title,
+  .navbar .navbar-brand.title,
+  .newspaper-nameplate .newspaper-title {
+    font-family: var(--holiday-heading-font);
+    font-style: normal;
+    font-variation-settings: normal;
+    font-weight: 400 !important;
+    letter-spacing: 0.01em;
+
+    .font-weight-bold {
+      font-family: inherit;
+      font-style: normal;
+      font-variation-settings: normal;
+      font-weight: 400 !important;
+      color: var(--global-theme-color);
+
+      // The highlight sweep is tuned to the display serif's baseline.
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
+
+// The holiday pins light/dark, so the toggle would do nothing.
+html[data-holiday-mode] .toggle-container:has(#light-toggle) {
+  display: none;
+}
+
+.holiday-mark {
+  display: inline-block;
+  margin-left: 0.25em;
+  font-family: initial;
+  font-size: 0.7em;
+  font-style: normal;
+  vertical-align: 0.1em;
+}
+
+// ── Background patterns ────────────────────────────────────────────────────────
+
+html[data-holiday-pattern] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: var(--global-text-color);
+  opacity: 0.07;
+}
+
+html[data-holiday-pattern="cobweb"] body::before {
+  opacity: 0.16;
+  -webkit-mask:
+    $holiday-web-left top left / min(34vw, 320px) no-repeat,
+    $holiday-web-right top right / min(34vw, 320px) no-repeat;
+  mask:
+    $holiday-web-left top left / min(34vw, 320px) no-repeat,
+    $holiday-web-right top right / min(34vw, 320px) no-repeat;
+}
+
+html[data-holiday-pattern="stars"] body::before {
+  opacity: 0.22;
+  -webkit-mask: $holiday-stars 0 0 / 160px repeat;
+  mask: $holiday-stars 0 0 / 160px repeat;
+}
+
+html[data-holiday-pattern="snowflakes"] body::before {
+  opacity: 0.1;
+  -webkit-mask: $holiday-snowflakes 0 0 / 120px repeat;
+  mask: $holiday-snowflakes 0 0 / 120px repeat;
+}
+
+html[data-holiday-pattern="hearts"] body::before {
+  background-color: var(--global-theme-color);
+  opacity: 0.1;
+  -webkit-mask: $holiday-hearts 0 0 / 120px repeat;
+  mask: $holiday-hearts 0 0 / 120px repeat;
+}
+
+// ── Greeting strip ─────────────────────────────────────────────────────────────
+
+.holiday-greeting {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.35rem 1rem;
+  border-bottom: 1px solid var(--global-divider-color);
+  color: var(--global-theme-color);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.holiday-greeting-close {
+  padding: 0 0.3rem;
+  border: 0;
+  background: transparent;
+  color: var(--global-text-color-light);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--global-theme-color);
+  }
+}
+
+// ── Drifting effects ───────────────────────────────────────────────────────────
+
+.holiday-effect {
+  position: fixed;
+  inset: 0;
+  // Behind the text, in front of the pattern: a bat should never cross a sentence.
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.holiday-particle {
+  position: absolute;
+  display: block;
+  width: var(--size);
+  height: var(--size);
+  opacity: var(--alpha);
+  animation: holiday-fall var(--duration) linear var(--delay) infinite;
+  will-change: transform;
+
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.holiday-effect[data-effect="bats"] .holiday-particle {
+  top: var(--y);
+  left: 0;
+  height: calc(var(--size) * 0.44);
+  color: var(--global-text-color);
+  opacity: calc(var(--alpha) * 0.7);
+  animation-name: holiday-fly;
+
+  svg {
+    animation: holiday-flap 0.22s ease-in-out infinite alternate;
+  }
+}
+
+.holiday-effect[data-effect="leaves"] .holiday-particle {
+  top: -5vh;
+  left: var(--x);
+  color: var(--global-theme-color);
+}
+
+.holiday-effect[data-effect="snow"] .holiday-particle {
+  top: -5vh;
+  left: var(--x);
+  width: calc(var(--size) * 0.4);
+  height: calc(var(--size) * 0.4);
+  border-radius: 50%;
+  background: var(--global-text-color);
+}
+
+.holiday-effect[data-effect="petals"] .holiday-particle {
+  top: -5vh;
+  left: var(--x);
+  height: calc(var(--size) * 0.7);
+  border-radius: 100% 0;
+  background: var(--global-theme-color);
+}
+
+.holiday-effect[data-effect="sparkles"] .holiday-particle {
+  top: var(--y);
+  left: var(--x);
+  width: calc(var(--size) * 0.6);
+  height: calc(var(--size) * 0.6);
+  background: var(--global-theme-color);
+  clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%);
+  animation-name: holiday-twinkle;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes holiday-fall {
+  from {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  to {
+    transform: translate(var(--drift), 112vh) rotate(var(--spin));
+  }
+}
+
+@keyframes holiday-fly {
+  0% {
+    transform: translate(-10vw, 0);
+  }
+  25% {
+    transform: translate(22vw, -4vh);
+  }
+  50% {
+    transform: translate(50vw, 3vh);
+  }
+  75% {
+    transform: translate(80vw, -3vh);
+  }
+  100% {
+    transform: translate(110vw, 0);
+  }
+}
+
+@keyframes holiday-twinkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.2) rotate(0deg);
+  }
+  50% {
+    opacity: var(--alpha);
+    transform: scale(1) rotate(45deg);
+  }
+}
+
+@keyframes holiday-flap {
+  to {
+    transform: scaleY(0.4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .holiday-effect {
+    display: none;
+  }
+}
