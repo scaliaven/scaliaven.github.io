@@ -222,6 +222,12 @@ let determineThemeSetting = () => {
 // Determine the computed theme, which can be "dark" or "light". If the theme setting is
 // "system", the computed theme is determined based on the user's system preference.
 let determineComputedTheme = () => {
+  // A seasonal theme (assets/js/holiday.js) may pin the palette while it runs.
+  let holidayMode = document.documentElement.getAttribute("data-holiday-mode");
+  if (holidayMode == "dark" || holidayMode == "light") {
+    return holidayMode;
+  }
+
   let themeSetting = determineThemeSetting();
   if (themeSetting == "system") {
     const userPref = window.matchMedia;
